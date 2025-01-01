@@ -1,99 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A.D.Gad - Solutions for Electronics</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: linear-gradient(to right, #ff0000, #b3b3b3);
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 0.5rem 0;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-        nav a:hover {
-            color: #ffd700;
-        }
-        section {
-            padding: 2rem;
-            text-align: center;
-        }
-        .about, .services, .projects, .contact {
-            margin: 2rem 0;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-        }
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A.D.GAD</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #d32f2f, #b0bec5);
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #333;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0 15px;
+      font-size: 1.2em;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      color: #d32f2f;
+      border-bottom: 2px solid #d32f2f;
+      padding-bottom: 5px;
+    }
+
+    section img {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      background: #333;
+      color: white;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>A.D.Gad</h1>
-        <p>Innovative Solutions for Electronics</p>
-    </header>
-    <nav>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact Us</a>
-    </nav>
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.</p>
-    </section>
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <p>We offer custom electronic circuit designs, software development, and automation solutions.</p>
-    </section>
-    <section id="projects" class="projects">
-        <h2>Our Projects</h2>
-        <p>Explore our innovative projects, including gesture-based control and inverter systems.</p>
-    </section>
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>We'd love to hear from you! Fill out the form below to get in touch.</p>
-        <form>
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="5" required></textarea><br><br>
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-    <footer>
-        <p>&copy; 2024 A.D.Gad. All Rights Reserved.</p>
-    </footer>
+  <header>
+    <h1>شركة A.D.GAD</h1>
+  </header>
+
+  <nav>
+    <a href="#logo">اللوغو</a>
+    <a href="#projects">مشاريعنا</a>
+    <a href="#services">خدماتنا</a>
+  </nav>
+
+  <section id="logo">
+    <h2>لوغو الشركة</h2>
+    <img src="images/logo.png" alt="A.D.GAD Logo">
+  </section>
+
+  <section id="projects">
+    <h2>مشاريعنا</h2>
+    <article>
+      <h3>دائرة الإنفرتر المبسطة</h3>
+      <p>دائرة الإنفرتر تتكون من موحد سليكوني، مكثف 3300 ميكرو فاراد، ومكونات أخرى أساسية مثل ترانزستورات ومحول سنتر تاب.</p>
+    </article>
+    <article>
+      <h3>التطوير المضاف</h3>
+      <p>قمنا بإضافة برنامج ذكي للتحكم في الدائرة باستخدام إشارات اليد مثل فتح وإغلاق الريلاي لتحكم أوتوماتيكي في النظام.</p>
+    </article>
+  </section>
+
+  <section id="services">
+    <h2>خدماتنا</h2>
+    <article>
+      <h3>تصميم دوائر مطبوعة</h3>
+      <p>نوفر خدمات تصميم احترافية للدوائر المطبوعة PCB باستخدام أحدث التقنيات.</p>
+    </article>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 شركة A.D.GAD. جميع الحقوق محفوظة.</p>
+  </footer>
 </body>
 </html>
