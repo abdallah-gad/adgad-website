@@ -1,26 +1,152 @@
-<script>
-    // Function to change language
-    function changeLanguage() {
-        var language = document.getElementById("languageSelect").value;
-        
-        if (language === "ar") {
-            document.getElementById("aboutTitle").innerHTML = "معلومات عنا";
-            document.getElementById("aboutDescription").innerHTML = "في A.D.Gad، نحن متخصصون في تقديم حلول إلكترونية متقدمة وتصميمات مبتكرة مصممة لتلبية احتياجات عملائنا.";
-            document.getElementById("servicesTitle").innerHTML = "خدماتنا";
-            document.getElementById("servicesDescription").innerHTML = "نحن نقدم تصميمات دوائر إلكترونية مخصصة، وتطوير البرمجيات، وحلول الأتمتة.";
-            document.getElementById("projectsTitle").innerHTML = "مشاريعنا";
-            document.getElementById("projectsDescription").innerHTML = "استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإيماءات وأنظمة الانفرتر.";
-            document.getElementById("contactTitle").innerHTML = "اتصل بنا";
-            document.getElementById("contactDescription").innerHTML = "نود سماع آرائكم! املأ النموذج أدناه للتواصل معنا.";
-        } else {
-            document.getElementById("aboutTitle").innerHTML = "About Us";
-            document.getElementById("aboutDescription").innerHTML = "At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.";
-            document.getElementById("servicesTitle").innerHTML = "Our Services";
-            document.getElementById("servicesDescription").innerHTML = "We offer custom electronic circuit designs, software development, and automation solutions.";
-            document.getElementById("projectsTitle").innerHTML = "Our Projects";
-            document.getElementById("projectsDescription").innerHTML = "Explore our innovative projects, including gesture-based control and inverter systems.";
-            document.getElementById("contactTitle").innerHTML = "Contact Us";
-            document.getElementById("contactDescription").innerHTML = "We'd love to hear from you! Fill out the form below to get in touch.";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A.D.Gad - Innovative Solutions for Electronics">
+    <meta name="keywords" content="electronics, A.D.Gad, innovative solutions, electronics design">
+    <meta name="author" content="A.D.Gad">
+    <title>A.D.Gad - Solutions for Electronics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-    }
-</script>
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        header img {
+            width: 50px;
+            position: absolute;
+            right: 20px;
+            top: 10px;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Language selector styles */
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>A.D.Gad</h1>
+        <p>Innovative Solutions for Electronics</p>
+        <img src="images/logo.png" alt="A.D.Gad Logo">
+        <!-- Language selector -->
+        <div class="language-selector">
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+            </select>
+        </div>
+    </header>
+    <nav>
+        <a href="#about">About Us</a>
+        <a href="#services">Our Services</a>
+        <a href="#projects">Our Projects</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+    <section id="about" class="about">
+        <h2 id="aboutTitle">About Us</h2>
+        <p id="aboutDescription">At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.</p>
+    </section>
+    <section id="services" class="services">
+        <h2 id="servicesTitle">Our Services</h2>
+        <p id="servicesDescription">We offer custom electronic circuit designs, software development, and automation solutions.</p>
+    </section>
+    <section id="projects" class="projects">
+        <h2 id="projectsTitle">Our Projects</h2>
+        <p id="projectsDescription">Explore our innovative projects, including gesture-based control and inverter systems.</p>
+    </section>
+    <section id="contact" class="contact">
+        <h2 id="contactTitle">Contact Us</h2>
+        <p id="contactDescription">We'd love to hear from you! Fill out the form below to get in touch.</p>
+        <form>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <footer>
+        <p>&copy; 2024 A.D.Gad. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Function to change language
+        function changeLanguage() {
+            var language = document.getElementById("languageSelect").value;
+            
+            if (language === "ar") {
+                document.getElementById("aboutTitle").innerHTML = "معلومات عنا";
+                document.getElementById("aboutDescription").innerHTML = "في A.D.Gad، نحن متخصصون في تقديم حلول إلكترونية متقدمة وتصميمات مبتكرة مصممة لتلبية احتياجات عملائنا.";
+                document.getElementById("servicesTitle").innerHTML = "خدماتنا";
+                document.getElementById("servicesDescription").innerHTML = "نحن نقدم تصميمات دوائر إلكترونية مخصصة، وتطوير البرمجيات، وحلول الأتمتة.";
+                document.getElementById("projectsTitle").innerHTML = "مشاريعنا";
+                document.getElementById("projectsDescription").innerHTML = "استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإيماءات وأنظمة الانفرتر.";
+                document.getElementById("contactTitle").innerHTML = "اتصل بنا";
+                document.getElementById("contactDescription").innerHTML = "نود سماع آرائكم! املأ النموذج أدناه للتواصل معنا.";
+            } else {
+                document.getElementById("aboutTitle").innerHTML = "About Us";
+                document.getElementById("aboutDescription").innerHTML = "At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.";
+                document.getElementById("servicesTitle").innerHTML = "Our Services";
+                document.getElementById("servicesDescription").innerHTML = "We offer custom electronic circuit designs, software development, and automation solutions.";
+                document.getElementById("projectsTitle").innerHTML = "Our Projects";
+                document.getElementById("projectsDescription").innerHTML = "Explore our innovative projects, including gesture-based control and inverter systems.";
+                document.getElementById("contactTitle").innerHTML = "Contact Us";
+                document.getElementById("contactDescription").innerHTML = "We'd love to hear from you! Fill out the form below to get in touch.";
+            }
+        }
+    </script>
+</body>
+</html>
