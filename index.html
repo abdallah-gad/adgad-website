@@ -3,48 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A.D.Gad - Innovative Solutions for Electronics">
-    <meta name="keywords" content="electronics, A.D.Gad, innovative solutions, electronics design">
+    <meta name="description" content="شركة A.D.Gad للإلكترونيات - حلول تقنية مبتكرة وتصميم الدوائر الإلكترونية">
+    <meta name="keywords" content="A.D.Gad, شركة إلكترونيات, تصميم الدوائر, حلول تقنية, إلكترونيات مبتكرة">
     <meta name="author" content="A.D.Gad">
-    <title>A.D.Gad - Solutions for Electronics</title>
+    <title>شركة A.D.Gad للإلكترونيات</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+            background-color: #f4f4f9;
             color: #333;
         }
 
         header {
-            background: #333;
+            background-color: #333;
             color: #fff;
             padding: 1rem 0;
             text-align: center;
+            position: relative;
         }
 
         header img {
-            display: block;
-            margin: 0 auto;
-            max-width: 100px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
         }
 
         nav {
-            display: flex;
-            justify-content: center;
-            background: #444;
-            color: #fff;
+            text-align: center;
+            margin: 1rem 0;
         }
 
         nav a {
-            color: #fff;
+            margin: 0 15px;
             text-decoration: none;
-            padding: 1rem;
+            color: #333;
         }
 
         nav a:hover {
-            background: #555;
+            text-decoration: underline;
         }
 
         section {
@@ -53,9 +53,9 @@
         }
 
         footer {
-            text-align: center;
-            background: #333;
+            background-color: #333;
             color: #fff;
+            text-align: center;
             padding: 1rem 0;
             margin-top: 2rem;
         }
@@ -70,21 +70,12 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin: 0.5rem 0;
-        }
     </style>
 </head>
 <body>
     <header>
-        <h1>A.D.Gad</h1>
-        <p id="tagline">Innovative Solutions for Electronics</p>
+        <h1>شركة A.D.Gad للإلكترونيات</h1>
+        <p>حلول تقنية مبتكرة وتصميم الدوائر الإلكترونية</p>
         <img src="images/logo.png" alt="A.D.Gad Logo">
         <div class="language-selector">
             <select id="languageSelect" onchange="changeLanguage()">
@@ -94,88 +85,63 @@
         </div>
     </header>
     <nav>
-        <a href="#about">About Us</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#commitment">Commitment</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">عن الشركة</a>
+        <a href="#services">الخدمات</a>
+        <a href="#projects">المشاريع</a>
+        <a href="#contact">تواصل معنا</a>
     </nav>
-    <section id="about">
-        <h2 id="aboutTitle">About Us</h2>
-        <p id="aboutDescription">At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.</p>
+    <section id="about" class="about">
+        <h2 id="aboutTitle">عن الشركة</h2>
+        <p id="aboutDescription">نحن في شركة A.D.Gad متخصصون في تقديم حلول إلكترونية متقدمة وتصاميم إبداعية لتلبية احتياجات عملائنا.</p>
     </section>
-    <section id="services">
-        <h2 id="servicesTitle">Our Services</h2>
-        <p id="servicesDescription">We offer custom electronic circuit designs, software development, and automation solutions.</p>
+    <section id="services" class="services">
+        <h2 id="servicesTitle">الخدمات</h2>
+        <p id="servicesDescription">نوفر تصميم الدوائر الإلكترونية المخصصة، تطوير البرمجيات، وحلول الأتمتة.</p>
     </section>
-    <section id="projects">
-        <h2 id="projectsTitle">Our Projects</h2>
-        <p id="projectsDescription">Explore our innovative projects, including gesture-based control and inverter systems.</p>
+    <section id="projects" class="projects">
+        <h2 id="projectsTitle">المشاريع</h2>
+        <p id="projectsDescription">استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإشارات اليدوية وأنظمة الإنفرتر.</p>
     </section>
-    <section id="commitment">
-        <h2 id="commitmentTitle">Our Commitment</h2>
-        <p id="commitmentDescription">At A.D.Gad, we are committed to delivering the best quality, innovation, and service. We strive to ensure customer satisfaction and long-term success in every project.</p>
-        <ul id="commitmentPoints">
-            <li>High-quality electronic designs.</li>
-            <li>Timely delivery of projects.</li>
-            <li>Customer-focused solutions.</li>
-            <li>Continuous improvement and innovation.</li>
-            <li>Adherence to industry standards and best practices.</li>
-        </ul>
-    </section>
-    <section id="contact">
-        <h2 id="contactTitle">Contact Us</h2>
-        <p id="contactDescription">We'd love to hear from you! Fill out the form below to get in touch.</p>
+    <section id="contact" class="contact">
+        <h2 id="contactTitle">تواصل معنا</h2>
+        <p id="contactDescription">نود سماع آرائكم! يرجى ملء النموذج أدناه للتواصل.</p>
         <form>
-            <label for="name">Name:</label><br>
+            <label for="name">الاسم:</label><br>
             <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label><br>
+
+            <label for="email">البريد الإلكتروني:</label><br>
             <input type="email" id="email" name="email" required><br><br>
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" required></textarea><br><br>
-            <button type="submit">Send</button>
+
+            <label for="message">رسالتك:</label><br>
+            <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+            <button type="submit">إرسال</button>
         </form>
     </section>
     <footer>
-        <p>&copy; 2024 A.D.Gad. All Rights Reserved.</p>
+        <p>&copy; 2025 A.D.Gad. جميع الحقوق محفوظة.</p>
     </footer>
     <script>
         function changeLanguage() {
-            const language = document.getElementById("languageSelect").value;
-            if (language === "ar") {
-                document.getElementById("aboutTitle").innerHTML = "من نحن";
-                document.getElementById("aboutDescription").innerHTML = "في A.D.Gad، نحن متخصصون في تقديم حلول إلكترونية متقدمة وتصميمات إبداعية تلبي احتياجات عملائنا.";
-                document.getElementById("servicesTitle").innerHTML = "خدماتنا";
-                document.getElementById("servicesDescription").innerHTML = "نقدم تصميمات دوائر إلكترونية مخصصة، وتطوير البرمجيات، وحلول الأتمتة.";
-                document.getElementById("projectsTitle").innerHTML = "مشاريعنا";
-                document.getElementById("projectsDescription").innerHTML = "استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإيماءات وأنظمة المحولات.";
-                document.getElementById("commitmentTitle").innerHTML = "التزامنا";
-                document.getElementById("commitmentDescription").innerHTML = "في A.D.Gad، نحن ملتزمون بتقديم أعلى مستويات الجودة، والابتكار، والخدمة. نحن نسعى لضمان رضا العملاء وتحقيق النجاح الطويل الأمد في كل مشروع.";
-                document.getElementById("commitmentPoints").innerHTML = `
-                    <li>تصميمات إلكترونية عالية الجودة.</li>
-                    <li>تسليم المشاريع في الوقت المحدد.</li>
-                    <li>حلول تركز على العميل.</li>
-                    <li>التحسين المستمر والابتكار.</li>
-                    <li>الالتزام بمعايير الصناعة وأفضل الممارسات.</li>`;
-                document.getElementById("contactTitle").innerHTML = "تواصل معنا";
-                document.getElementById("contactDescription").innerHTML = "نسعد بسماع آرائكم! املأ النموذج أدناه للتواصل معنا.";
+            const lang = document.getElementById("languageSelect").value;
+            if (lang === "ar") {
+                document.getElementById("aboutTitle").textContent = "عن الشركة";
+                document.getElementById("aboutDescription").textContent = "نحن في شركة A.D.Gad متخصصون في تقديم حلول إلكترونية متقدمة وتصاميم إبداعية لتلبية احتياجات عملائنا.";
+                document.getElementById("servicesTitle").textContent = "الخدمات";
+                document.getElementById("servicesDescription").textContent = "نوفر تصميم الدوائر الإلكترونية المخصصة، تطوير البرمجيات، وحلول الأتمتة.";
+                document.getElementById("projectsTitle").textContent = "المشاريع";
+                document.getElementById("projectsDescription").textContent = "استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإشارات اليدوية وأنظمة الإنفرتر.";
+                document.getElementById("contactTitle").textContent = "تواصل معنا";
+                document.getElementById("contactDescription").textContent = "نود سماع آرائكم! يرجى ملء النموذج أدناه للتواصل.";
             } else {
-                document.getElementById("aboutTitle").innerHTML = "About Us";
-                document.getElementById("aboutDescription").innerHTML = "At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.";
-                document.getElementById("servicesTitle").innerHTML = "Our Services";
-                document.getElementById("servicesDescription").innerHTML = "We offer custom electronic circuit designs, software development, and automation solutions.";
-                document.getElementById("projectsTitle").innerHTML = "Our Projects";
-                document.getElementById("projectsDescription").innerHTML = "Explore our innovative projects, including gesture-based control and inverter systems.";
-                document.getElementById("commitmentTitle").innerHTML = "Our Commitment";
-                document.getElementById("commitmentDescription").innerHTML = "At A.D.Gad, we are committed to delivering the best quality, innovation, and service. We strive to ensure customer satisfaction and long-term success in every project.";
-                document.getElementById("commitmentPoints").innerHTML = `
-                    <li>High-quality electronic designs.</li>
-                    <li>Timely delivery of projects.</li>
-                    <li>Customer-focused solutions.</li>
-                    <li>Continuous improvement and innovation.</li>
-                    <li>Adherence to industry standards and best practices.</li>`;
-                document.getElementById("contactTitle").innerHTML = "Contact Us";
-                document.getElementById("contactDescription").innerHTML = "We'd love to hear from you! Fill out the form below to get in touch.";
+                document.getElementById("aboutTitle").textContent = "About Us";
+                document.getElementById("aboutDescription").textContent = "At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.";
+                document.getElementById("servicesTitle").textContent = "Our Services";
+                document.getElementById("servicesDescription").textContent = "We offer custom electronic circuit designs, software development, and automation solutions.";
+                document.getElementById("projectsTitle").textContent = "Our Projects";
+                document.getElementById("projectsDescription").textContent = "Explore our innovative projects, including gesture-based control and inverter systems.";
+                document.getElementById("contactTitle").textContent = "Contact Us";
+                document.getElementById("contactDescription").textContent = "We'd love to hear from you! Fill out the form below to get in touch.";
             }
         }
     </script>
