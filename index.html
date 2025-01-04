@@ -3,147 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="شركة A.D.Gad للإلكترونيات - حلول تقنية مبتكرة وتصميم الدوائر الإلكترونية">
-    <meta name="keywords" content="A.D.Gad, شركة إلكترونيات, تصميم الدوائر, حلول تقنية, إلكترونيات مبتكرة">
+    <meta name="description" content="A.D.Gad - Innovative Solutions for Electronics">
+    <meta name="keywords" content="electronics, A.D.Gad, innovative solutions, electronics design">
     <meta name="author" content="A.D.Gad">
-    <title>شركة A.D.Gad للإلكترونيات</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        header img {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 50px;
-        }
-
-        nav {
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        section {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-
-        .language-selector {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #333;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-    </style>
+    <title>A.D.Gad - Solutions for Electronics</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>شركة A.D.Gad للإلكترونيات</h1>
-        <p>حلول تقنية مبتكرة وتصميم الدوائر الإلكترونية</p>
-        <img src="images/logo.png" alt="A.D.Gad Logo">
-        <div class="language-selector">
-            <select id="languageSelect" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="ar">العربية</option>
-            </select>
+        <div class="logo">
+            <img src="images/logo.png" alt="A.D.Gad Logo">
         </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
     </header>
-    <nav>
-        <a href="#about">عن الشركة</a>
-        <a href="#services">الخدمات</a>
-        <a href="#projects">المشاريع</a>
-        <a href="#contact">تواصل معنا</a>
-    </nav>
+
     <section id="about" class="about">
-        <h2 id="aboutTitle">عن الشركة</h2>
-        <p id="aboutDescription">نحن في شركة A.D.Gad متخصصون في تقديم حلول إلكترونية متقدمة وتصاميم إبداعية لتلبية احتياجات عملائنا.</p>
+        <h2>About Us</h2>
+        <p>At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.</p>
+        <p>Learn more about our founder and his journey in the <a href="about.html">About Us</a> page.</p>
     </section>
+
     <section id="services" class="services">
-        <h2 id="servicesTitle">الخدمات</h2>
-        <p id="servicesDescription">نوفر تصميم الدوائر الإلكترونية المخصصة، تطوير البرمجيات، وحلول الأتمتة.</p>
+        <h2>Our Services</h2>
+        <p>We offer custom electronic circuit designs, software development, and automation solutions.</p>
     </section>
+
     <section id="projects" class="projects">
-        <h2 id="projectsTitle">المشاريع</h2>
-        <p id="projectsDescription">استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإشارات اليدوية وأنظمة الإنفرتر.</p>
+        <h2>Our Projects</h2>
+        <p>Explore our innovative projects, including gesture-based control and inverter systems.</p>
     </section>
+
     <section id="contact" class="contact">
-        <h2 id="contactTitle">تواصل معنا</h2>
-        <p id="contactDescription">نود سماع آرائكم! يرجى ملء النموذج أدناه للتواصل.</p>
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Fill out the form below to get in touch.</p>
         <form>
-            <label for="name">الاسم:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <label for="email">البريد الإلكتروني:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-
-            <label for="message">رسالتك:</label><br>
-            <textarea id="message" name="message" rows="5" required></textarea><br><br>
-
-            <button type="submit">إرسال</button>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            
+            <button type="submit">Send</button>
         </form>
     </section>
+
     <footer>
-        <p>&copy; 2025 A.D.Gad. جميع الحقوق محفوظة.</p>
+        <div class="social-media">
+            <h3>Follow Us</h3>
+            <ul>
+                <li><a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank">Instagram</a></li>
+                <li><a href="https://x.com/adgadtech" target="_blank">Twitter</a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank">Facebook</a></li>
+                <li><a href="https://t.me/ADGadTech" target="_blank">Telegram</a></li>
+                <li><a href="https://wa.me/201115255682" target="_blank">WhatsApp</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 A.D.Gad Electronics. All Rights Reserved.</p>
     </footer>
-    <script>
-        function changeLanguage() {
-            const lang = document.getElementById("languageSelect").value;
-            if (lang === "ar") {
-                document.getElementById("aboutTitle").textContent = "عن الشركة";
-                document.getElementById("aboutDescription").textContent = "نحن في شركة A.D.Gad متخصصون في تقديم حلول إلكترونية متقدمة وتصاميم إبداعية لتلبية احتياجات عملائنا.";
-                document.getElementById("servicesTitle").textContent = "الخدمات";
-                document.getElementById("servicesDescription").textContent = "نوفر تصميم الدوائر الإلكترونية المخصصة، تطوير البرمجيات، وحلول الأتمتة.";
-                document.getElementById("projectsTitle").textContent = "المشاريع";
-                document.getElementById("projectsDescription").textContent = "استكشف مشاريعنا المبتكرة، بما في ذلك التحكم بالإشارات اليدوية وأنظمة الإنفرتر.";
-                document.getElementById("contactTitle").textContent = "تواصل معنا";
-                document.getElementById("contactDescription").textContent = "نود سماع آرائكم! يرجى ملء النموذج أدناه للتواصل.";
-            } else {
-                document.getElementById("aboutTitle").textContent = "About Us";
-                document.getElementById("aboutDescription").textContent = "At A.D.Gad, we specialize in delivering advanced electronics solutions and creative designs tailored to meet our clients' needs.";
-                document.getElementById("servicesTitle").textContent = "Our Services";
-                document.getElementById("servicesDescription").textContent = "We offer custom electronic circuit designs, software development, and automation solutions.";
-                document.getElementById("projectsTitle").textContent = "Our Projects";
-                document.getElementById("projectsDescription").textContent = "Explore our innovative projects, including gesture-based control and inverter systems.";
-                document.getElementById("contactTitle").textContent = "Contact Us";
-                document.getElementById("contactDescription").textContent = "We'd love to hear from you! Fill out the form below to get in touch.";
-            }
-        }
-    </script>
 </body>
 </html>
