@@ -1,57 +1,181 @@
-/* 1. ضبط حجم الصور */
-img {
-    max-width: 100%; /* يضمن أن الصورة لن تتجاوز عرض العنصر الحاوي */
-    height: auto;    /* الحفاظ على نسبة العرض إلى الارتفاع */
+/* Reset some basic elements for a clean start */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 2. استجابة التصميم للأجهزة الصغيرة */
-@media (max-width: 768px) {
-    /* تقليص حجم الخط للعناوين */
-    h1, h2, h3 {
-        font-size: 18px;
-    }
-
-    /* تقليص حجم النصوص */
-    p {
-        font-size: 14px;
-    }
-
-    /* ضبط عرض الصور */
-    img {
-        width: 100%; /* عرض الصورة بنسبة 100% من العنصر الحاوي */
-    }
-}
-
-/* 3. تحديد عرض الموقع بشكل مناسب */
-.container {
-    width: 100%; /* يجعل العنصر يغطي العرض بالكامل */
-    max-width: 1200px; /* يحد من العرض في الشاشات الكبيرة */
-    margin: 0 auto; /* يضمن أن العنصر في المنتصف */
-}
-
-/* 4. تحسين عرض النصوص */
+/* Body styling */
 body {
-    font-size: 16px; /* الحجم الافتراضي للنص */
-    line-height: 1.5; /* زيادة المسافة بين الأسطر */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
 }
 
-h1 {
+/* Header styles */
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo-link .logo {
+    width: 120px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+header nav ul li a:hover, header nav ul li a.active {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Main section styles */
+main {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* About section */
+.about-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.founder-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.founder-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.founder-info h2 {
     font-size: 2em;
 }
 
-h2 {
-    font-size: 1.5em;
+.founder-info p {
+    font-size: 1.2em;
+    max-width: 600px;
+    text-align: justify;
 }
 
-/* 5. تحسين تصميم الأزرار */
-button {
-    padding: 10px 20px; /* إضافة مساحة داخل الأزرار */
-    font-size: 1rem; /* تحديد حجم الخط داخل الأزرار */
-    border-radius: 5px; /* جعل الأزرار ذات حواف دائرية */
+.gallery {
+    text-align: center;
 }
 
-/* 6. إضافة تصميم مرن للتصغير والضبط */
-.meta-viewport {
-    width: device-width;
-    initial-scale: 1.0;
+.gallery h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer .social-links {
+    margin-top: 15px;
+}
+
+footer .social-links a {
+    margin: 0 10px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+footer .social-links img {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+}
+
+footer .social-links a:hover img {
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header .logo-link .logo {
+        width: 100px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    .about-section {
+        padding: 40px 20px;
+    }
+
+    .founder-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
