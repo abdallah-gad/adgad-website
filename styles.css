@@ -1,181 +1,150 @@
-/* Reset some basic elements for a clean start */
+/* استايل عام للصفحة */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
     line-height: 1.6;
-    margin: 0;
+    color: #333;
+    background-color: #f4f4f4;
 }
 
-/* Header styles */
+h1, h2, h3 {
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* شريط التنقل */
 header {
-    background-color: #333;
-    color: white;
-    padding: 15px 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #333;
 }
 
-header .logo-link .logo {
-    width: 120px;
+.header-content {
+    display: flex;
+    align-items: center;
 }
 
-header nav ul {
+.logo-container .logo {
+    width: 80px; /* حجم الشعار */
+    height: auto;
+}
+
+.company-name h1 {
+    font-size: 2rem;
+    margin-left: 15px;
+    color: white;
+}
+
+nav ul {
     display: flex;
     list-style: none;
 }
 
-header nav ul li {
+nav ul li {
     margin-left: 20px;
 }
 
-header nav ul li a {
-    text-decoration: none;
+nav ul li a {
     color: white;
-    font-weight: bold;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
 }
 
-header nav ul li a:hover, header nav ul li a.active {
+nav ul li a:hover {
     background-color: #555;
     border-radius: 5px;
 }
 
-/* Main section styles */
-main {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* القسم "عن الشركة" */
+.about-section {
+    background-color: #fff;
+    padding: 40px 20px;
+    text-align: center;
 }
 
-/* About section */
 .about-section h1 {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    text-align: center;
 }
 
 .founder-info {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
-    justify-content: center;
-    gap: 20px;
+    margin-bottom: 40px;
 }
 
 .founder-img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
 }
 
 .founder-info h2 {
-    font-size: 2em;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
 
 .founder-info p {
-    font-size: 1.2em;
-    max-width: 600px;
-    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 800px;
 }
 
 .gallery {
-    text-align: center;
-}
-
-.gallery h3 {
-    font-size: 2em;
-    margin-bottom: 20px;
+    margin-top: 30px;
 }
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .gallery-grid img {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
 }
 
-.gallery-grid img:hover {
-    transform: scale(1.05);
-}
-
-/* Footer styles */
+/* تذييل الصفحة */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
+}
+
+footer p {
+    margin-bottom: 15px;
 }
 
 footer .social-links {
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 footer .social-links a {
     margin: 0 10px;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
+    color: white;
+    font-size: 1.5rem;
 }
 
-footer .social-links img {
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.3s ease;
-}
-
-footer .social-links a:hover img {
-    opacity: 0.8;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    header .logo-link .logo {
-        width: 100px;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        margin-top: 10px;
-    }
-
-    header nav ul li {
-        margin: 10px 0;
-    }
-
-    .about-section {
-        padding: 40px 20px;
-    }
-
-    .founder-info {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+footer .social-links a:hover {
+    color: #ddd;
 }
