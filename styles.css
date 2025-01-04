@@ -1,32 +1,57 @@
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+/* 1. ضبط حجم الصور */
+img {
+    max-width: 100%; /* يضمن أن الصورة لن تتجاوز عرض العنصر الحاوي */
+    height: auto;    /* الحفاظ على نسبة العرض إلى الارتفاع */
 }
 
-footer .social-media {
-  margin-top: 1rem;
+/* 2. استجابة التصميم للأجهزة الصغيرة */
+@media (max-width: 768px) {
+    /* تقليص حجم الخط للعناوين */
+    h1, h2, h3 {
+        font-size: 18px;
+    }
+
+    /* تقليص حجم النصوص */
+    p {
+        font-size: 14px;
+    }
+
+    /* ضبط عرض الصور */
+    img {
+        width: 100%; /* عرض الصورة بنسبة 100% من العنصر الحاوي */
+    }
 }
 
-footer .social-media h3 {
-  margin-bottom: 0.5rem;
+/* 3. تحديد عرض الموقع بشكل مناسب */
+.container {
+    width: 100%; /* يجعل العنصر يغطي العرض بالكامل */
+    max-width: 1200px; /* يحد من العرض في الشاشات الكبيرة */
+    margin: 0 auto; /* يضمن أن العنصر في المنتصف */
 }
 
-footer .social-media a {
-  margin: 0 10px;
-  display: inline-block;
+/* 4. تحسين عرض النصوص */
+body {
+    font-size: 16px; /* الحجم الافتراضي للنص */
+    line-height: 1.5; /* زيادة المسافة بين الأسطر */
 }
 
-footer .social-media img {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.3s ease;
+h1 {
+    font-size: 2em;
 }
 
-footer .social-media img:hover {
-  transform: scale(1.1);
+h2 {
+    font-size: 1.5em;
+}
+
+/* 5. تحسين تصميم الأزرار */
+button {
+    padding: 10px 20px; /* إضافة مساحة داخل الأزرار */
+    font-size: 1rem; /* تحديد حجم الخط داخل الأزرار */
+    border-radius: 5px; /* جعل الأزرار ذات حواف دائرية */
+}
+
+/* 6. إضافة تصميم مرن للتصغير والضبط */
+.meta-viewport {
+    width: device-width;
+    initial-scale: 1.0;
 }
