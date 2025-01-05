@@ -1,95 +1,165 @@
-/* إعدادات عامة */
+/* تنسيق أساسي للصفحة بالكامل */
 body {
-    margin: 0;
-    font-family: "Arial", sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
-}
-
-/* الهيدر */
-header {
-    background-color: #202020;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo {
-    max-width: 80px; /* تقليل حجم الشعار */
-    height: auto;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
 }
 
-.nav-links li {
-    margin-left: 20px;
+/* تنسيق الرأس */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.nav-links a {
+header img {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+/* تنسيق شريط التنقل */
+nav {
+    background-color: #444;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
     text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    padding: 5px 10px;
-    transition: color 0.3s ease;
+    padding: 10px 20px;
+    display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    color: #e63946; /* لون مميز عند التحديد */
+nav a:hover, nav a.active {
+    background-color: #555;
+    border-radius: 5px;
 }
 
-/* القسم الرئيسي */
-.welcome-section {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    border-radius: 10px;
+/* تنسيق القسم الرئيسي */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.welcome-section h1 {
-    font-size: 32px;
-    color: #202020;
-    margin-bottom: 10px;
+main h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e63946;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
-.welcome-section p {
-    font-size: 18px;
-    color: #555;
+main p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
-/* الفوتر */
+/* تنسيق الصور */
+main img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيق الفوتر */
 footer {
-    background-color: #202020;
+    background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 20px 10px;
+    padding: 10px 0;
+    margin-top: 20px;
 }
 
-.social-links img {
-    width: 24px;
-    height: 24px;
-    margin: 0 5px;
+footer a {
+    color: #e63946;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* تنسيق أيقونات وسائل التواصل الاجتماعي */
+footer .social-icons {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+footer .social-icons a {
+    margin: 0 10px;
+    color: #fff;
+    font-size: 1.5em;
     transition: transform 0.3s ease;
 }
 
-.social-links img:hover {
+footer .social-icons a:hover {
     transform: scale(1.1);
+    color: #e63946;
+}
+
+/* تحسين العرض للأجهزة الصغيرة */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    header img {
+        max-width: 80px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تصميم خاص بمعرض الصور */
+.gallery {
+    margin-top: 30px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
