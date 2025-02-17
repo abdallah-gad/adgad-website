@@ -3,21 +3,26 @@
     <url>
         <loc>https://abdallah-gad.github.io/adgad-website/</loc>
         <lastmod>2025-02-17</lastmod>
-        <priority>1.0</priority>
+        <priority>1.00</priority>
     </url>
     <url>
-        <loc>https://abdallah-gad.github.io/adgad-website/search.html</loc>
+        <loc>https://abdallah-gad.github.io/adgad-website/Contact.html</loc>
         <lastmod>2025-02-17</lastmod>
-        <priority>0.8</priority>
+        <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://abdallah-gad.github.io/adgad-website/contact.html</loc>
+        <loc>https://abdallah-gad.github.io/adgad-website/Projects.html</loc>
         <lastmod>2025-02-17</lastmod>
-        <priority>0.8</priority>
+        <priority>0.80</priority>
     </url>
     <url>
-        <loc>https://abdallah-gad.github.io/adgad-website/projects.html</loc>
+        <loc>https://abdallah-gad.github.io/adgad-website/About.html</loc>
         <lastmod>2025-02-17</lastmod>
-        <priority>0.7</priority>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://abdallah-gad.github.io/adgad-website/Services.html</loc>
+        <lastmod>2025-02-17</lastmod>
+        <priority>0.80</priority>
     </url>
 </urlset>
