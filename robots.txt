@@ -1,3 +1,0 @@
-User-agent: *
-Disallow:
-Sitemap: https://abdallah-gad.github.io/adgad-website/sitemap.xml

@@ -3,54 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A.D.Gad Electronics</title>
-    <link rel="stylesheet" href="home.css">
+    <title>A.D.Gad | عالم الابتكار والإبداع</title>
+    
+    <!-- تضمين مكتبة Tailwind CSS لتنسيق الصفحة -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تضمين مكتبة GSAP لإنشاء تأثيرات الحركة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- تضمين مكتبة Font Awesome لإضافة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* تنسيق الخلفية والخطوط */
+        body {
+            background: linear-gradient(to right, #000000, #b3b3b3);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* تأثيرات الحركة على العناصر */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* تنسيق شريط التنقل */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .navbar a:hover {
+            color: gold;
+        }
+        
+        /* تنسيق القسم الترحيبي */
+        .hero {
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .hero img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 2px 2px 15px gold;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* أزرار الدعوة لاتخاذ إجراء */
+        .cta-buttons {
+            margin-top: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background: #ff0000;
+            color: white;
+            border-radius: 30px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            background: gold;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            position: relative;
+            z-index: 10;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 2.2rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .social-icons a:hover {
+            color: gold;
+            transform: scale(1.3);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <a href="index.html" class="logo-link">
-                    <img src="images/logo.png" alt="A.D.Gad Logo" class="logo">
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">الرئيسية</a></li>
-                <li><a href="about.html">عنا</a></li>
-                <li><a href="#services">الخدمات</a></li>
-                <li><a href="#contact">تواصل معنا</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="services.html">الخدمات</a>
+        <a href="projects.html">المشاريع</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">اتصل بنا</a>
+    </nav>
 
-    <main>
-        <section class="welcome-section">
-            <h1>أهلاً بكم في A.D.Gad</h1>
-            <p>
-                نقدم حلولاً مبتكرة في مجال الإلكترونيات والتقنيات الحديثة لقيادة إنجازات مميزة.
-            </p>
-        </section>
-    </main>
+    <!-- القسم الترحيبي -->
+    <div class="hero fade-in">
+        <img src="images/logo.png" alt="A.D.Gad Logo">
+        <h1>A.D.Gad | مستقبل التكنولوجيا يبدأ هنا!</h1>
+        <p>نقدم لك أحدث الحلول البرمجية والإلكترونية بلمسة احترافية.</p>
+        <div class="cta-buttons">
+            <a href="services.html" class="cta-button">استكشف خدماتنا</a>
+            <a href="projects.html" class="cta-button">استكشف مشاريعنا</a>
+        </div>
+    </div>
 
-    <footer>
-        <p>© 2025 جميع الحقوق محفوظة لشركة A.D.Gad Electronics</p>
-        <div class="social-links">
-            <a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank">
-                <img src="images/instagram_icon.png" alt="Instagram">
-            </a>
-            <a href="https://x.com/adgadtech" target="_blank">
-                <img src="images/twitter_icon.png" alt="Twitter">
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank">
-                <img src="images/facebook_icon.png" alt="Facebook">
-            </a>
-            <a href="https://t.me/ADGadTech" target="_blank">
-                <img src="images/telegram_icon.png" alt="Telegram">
-            </a>
-            <a href="https://wa.me/201115255682" target="_blank">
-                <img src="images/whatsapp_icon.png" alt="WhatsApp">
-            </a>
+    <!-- التذييل: حقوق الملكية وأيقونات التواصل الاجتماعي -->
+    <footer class="fade-in">
+        <p>&copy; 2025 جميع الحقوق محفوظة لـ A.D.Gad</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/adgadtech" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://t.me/ADGadTech" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://api.whatsapp.com/send/?phone=201115255682&text&type=phone_number&app_absent=0" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@A.D.GadElectronicsCompany" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         </div>
     </footer>
+    
+    <!-- تشغيل تأثيرات الحركة -->
+    <script>
+        gsap.to(".fade-in", { opacity: 1, y: 0, duration: 1, stagger: 0.3 });
+    </script>
 </body>
 </html>
