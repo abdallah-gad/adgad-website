@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 *.zip filter=lfs diff=lfs merge=lfs -text
+=======
+downloads/Gesture[[:space:]]Control[[:space:]]Setup.zip filter=lfs diff=lfs merge=lfs -text
+>>>>>>> 00d8b8c8ad4b7c4ab8838c11ab8f292890e410b2
