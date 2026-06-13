@@ -101,7 +101,7 @@
             border-color: gold;
         }
         
-        /* تنسيق قسم المؤسس */
+        /* تنسيق قسم المؤسس - تعديل لظهور الصورة كاملة */
         .founder-section {
             display: flex;
             align-items: center;
@@ -121,21 +121,31 @@
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
             border-color: gold;
         }
+        
+        /* تعديل الصورة لتظهر كاملة من غير تقطيع */
+        .founder-img-container {
+            flex-shrink: 0;
+            text-align: center;
+        }
         .founder-img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
+            width: 280px;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
             border-radius: 20px;
             border: 3px solid #ff0000;
             transition: 0.3s;
+            background: rgba(0, 0, 0, 0.3);
         }
         .founder-img:hover {
             border-color: gold;
             transform: scale(1.02);
         }
+        
         .founder-text {
             flex: 1;
             text-align: center;
+            min-width: 250px;
         }
         .founder-text h2 {
             color: #ff0000;
@@ -277,14 +287,29 @@
                 margin: 20px;
             }
             .founder-img {
-                width: 200px;
-                height: 200px;
+                width: 220px;
+                max-height: 280px;
             }
             .navbar a {
                 font-size: 0.9rem;
             }
             .navbar {
                 gap: 10px;
+            }
+            .founder-text h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
+            .founder-img {
+                width: 180px;
+                max-height: 240px;
+            }
+            .badge {
+                font-size: 0.8rem;
+                padding: 6px 12px;
             }
         }
     </style>
@@ -316,9 +341,11 @@
         </p>
     </div>
 
-    <!-- قسم المؤسس -->
+    <!-- قسم المؤسس - مع تعديل لعرض الصورة كاملة -->
     <div class="founder-section fade-in">
-        <img src="images/founder.jpg" alt="المهندس عبدالله جاد" class="founder-img">
+        <div class="founder-img-container">
+            <img src="images/founder.jpg" alt="المهندس عبدالله جاد" class="founder-img">
+        </div>
         <div class="founder-text">
             <h2><i class="fas fa-user-tie"></i> المؤسس والمدير التنفيذي</h2>
             <p style="font-size: 1.1rem; line-height: 1.8;">
