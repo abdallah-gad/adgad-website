@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشاريعنا - A.D.Gad</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta name="description" content="A.D.Gad - استعرض أحدث مشاريعنا المبتكرة في مجال الإلكترونيات والبرمجيات">
+    <meta name="keywords" content="مشاريع, إلكترونيات, برمجيات, أنظمة مدمجة, A.D.Gad">
+    <title>مشاريعنا | A.D.Gad - عالم الابتكار والإبداع</title>
+    
+    <!-- تضمين مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تضمين مكتبة GSAP لإنشاء تأثيرات الحركة -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- تضمين مكتبة Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
+        /* تنسيق الخلفية والخطوط */
         body {
             background: linear-gradient(to right, #000000, #b3b3b3);
             color: white;
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
+        
+        /* تأثيرات الحركة على العناصر */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* تنسيق شريط التنقل */
         .navbar {
             display: flex;
             justify-content: center;
@@ -21,22 +40,51 @@
             padding: 15px;
             background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 15px rgba(255, 0, 0, 0.6);
         }
         .navbar a {
             color: white;
             font-size: 1.2rem;
             text-decoration: none;
             transition: 0.3s;
+            position: relative;
+        }
+        .navbar a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: gold;
+            transition: width 0.3s ease;
+        }
+        .navbar a:hover::before {
+            width: 100%;
         }
         .navbar a:hover {
             color: gold;
         }
+        
+        /* تنسيق القسم الترحيبي */
         .hero {
             text-align: center;
-            padding: 100px 20px;
+            padding: 140px 20px 60px;
+            position: relative;
+            z-index: 10;
         }
         .hero img {
-            width: 120px;
+            width: 150px;
+            height: auto;
             margin-bottom: 10px;
             animation: float 3s infinite ease-in-out;
         }
@@ -49,128 +97,713 @@
             font-size: 4rem;
             font-weight: bold;
             color: #ff0000;
-            text-shadow: 2px 2px 10px gold;
+            text-shadow: 2px 2px 15px gold;
         }
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 50px;
-            text-align: center;
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: bold;
         }
-        .project-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s, background 0.3s;
+        
+        /* تنسيق أزرار التصفية */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 10px 25px;
+            border-radius: 30px;
             cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
         }
-        .project-box:hover {
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff0000;
+            border-color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* تنسيق بطاقات المشاريع */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .project-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            cursor: pointer;
+            position: relative;
+        }
+        .project-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 0, 0, 0.7);
+            border-color: gold;
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.3);
         }
-        .project-box i {
-            font-size: 3rem;
-            margin-bottom: 15px;
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #ff0000, #b3b3b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-image i {
+            font-size: 5rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+        .project-card:hover .project-image i {
+            transform: scale(1.1);
             color: gold;
         }
-        .project-description {
-            display: none;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-        .download-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
             background: gold;
             color: black;
-            font-weight: bold;
+            padding: 5px 12px;
             border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .project-content {
+            padding: 25px;
+        }
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: gold;
+        }
+        .project-content p {
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        .project-tech {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .tech-tag {
+            background: rgba(255, 0, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        .project-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .project-btn {
+            background: #ff0000;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
             text-decoration: none;
             transition: 0.3s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .download-button:hover {
-            background: white;
-            color: red;
+        .project-btn:hover {
+            background: gold;
+            color: black;
+            transform: translateY(-2px);
         }
-        .footer {
-            text-align: center;
+        .download-btn {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid gold;
+        }
+        .download-btn:hover {
+            background: gold;
+            color: black;
+        }
+        
+        /* تفاصيل المشروع الموسعة */
+        .project-details {
+            display: none;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            margin-top: 15px;
+        }
+        .project-details.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* قسم الإحصائيات */
+        .stats-section {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 50px 20px;
+            margin: 50px 0;
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: gold;
+            display: block;
+        }
+        
+        /* قسم الشهادات */
+        .testimonials-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .testimonial-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+        .testimonial-card:hover {
+            border-color: gold;
+            transform: translateY(-5px);
+        }
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.6;
+        }
+        .testimonial-author {
+            margin-top: 15px;
+            color: gold;
+            font-weight: bold;
+        }
+        
+        /* زر العودة للأعلى */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background: gold;
+            color: black;
+            transform: translateY(-5px);
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: rgba(0, 0, 0, 0.95);
+            position: relative;
+            z-index: 10;
+            margin-top: 60px;
         }
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
         .social-icons a {
             color: white;
-            font-size: 2.2rem;
+            font-size: 2rem;
             transition: transform 0.3s, color 0.3s;
         }
         .social-icons a:hover {
             color: gold;
-            transform: scale(1.3);
+            transform: scale(1.2) translateY(-3px);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 1px 1px 10px gold;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000, gold);
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .navbar a { font-size: 0.85rem; }
+            .navbar { gap: 8px; }
+            .projects-grid { grid-template-columns: 1fr; padding: 15px; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar" id="navbar">
         <a href="index.html">الرئيسية</a>
         <a href="Services.html">الخدمات</a>
         <a href="Projects.html">المشاريع</a>
-        <a href="About.html">من نحن</a>
+        <a href="about.html">من نحن</a>
         <a href="Contact.html">اتصل بنا</a>
     </nav>
-    
-    <div class="hero">
+
+    <!-- القسم الترحيبي -->
+    <div class="hero fade-in">
         <img src="images/logo.png" alt="A.D.Gad Logo">
         <h1>مشاريعنا</h1>
-        <p>استعرض أحدث مشاريعنا المبتكرة التي تم تنفيذها باحترافية.</p>
+        <p>استعرض أحدث مشاريعنا المبتكرة التي تم تنفيذها باحترافية</p>
     </div>
-    
-    <section class="projects">
-        <div class="project-box" onclick="toggleDescription(0)">
-            <i class="fa-solid fa-microchip"></i>
-            <h3>مشروع تصميم دائرة إلكترونية</h3>
-            <p class="project-description">نظام إلكتروني متقدم يستخدم أحدث التقنيات لتوفير حلول ذكية.</p>
+
+    <!-- أزرار التصفية -->
+    <div class="filter-buttons fade-in">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="electronics">إلكترونيات</button>
+        <button class="filter-btn" data-filter="software">برمجيات</button>
+        <button class="filter-btn" data-filter="embedded">أنظمة مدمجة</button>
+    </div>
+
+    <!-- شبكة المشاريع -->
+    <div class="projects-grid fade-in" id="projectsGrid">
+        <!-- المشروع 1 -->
+        <div class="project-card" data-category="electronics">
+            <div class="project-image">
+                <i class="fa-solid fa-microchip"></i>
+                <span class="project-badge">مكتمل</span>
+            </div>
+            <div class="project-content">
+                <h3>نظام تحكم صناعي ذكي</h3>
+                <p>نظام إلكتروني متقدم يستخدم أحدث التقنيات لتوفير حلول تحكم ذكية للمصانع والمنشآت الصناعية.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">Sensors</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(0)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                </div>
+            </div>
+            <div class="project-details" id="details-0">
+                <h4 style="color: gold;"><i class="fas fa-clipboard-list"></i> تفاصيل المشروع:</h4>
+                <p>تم تصميم هذا النظام للتحكم في خطوط الإنتاج الصناعية باستخدام متحكمات ESP32 مع مستشعرات ذكية، يتيح النظام مراقبة وتحليل البيانات لحظيًا وتقديم تقارير دقيقة عن أداء الآلات.</p>
+                <ul style="margin-top: 10px; margin-right: 20px;">
+                    <li>✓ نظام مراقبة عن بعد عبر الإنترنت</li>
+                    <li>✓ تنبيهات فورية في حالة الأعطال</li>
+                    <li>✓ واجهة تحكم سهلة الاستخدام</li>
+                </ul>
+            </div>
         </div>
-        <div class="project-box" onclick="toggleDescription(1)">
-            <i class="fa-solid fa-code"></i>
-            <h3>برنامج التحكم الذكي</h3>
-            <p class="project-description">برنامج متطور للتحكم في الأجهزة عبر الإنترنت، يوفر واجهة مستخدم سهلة الاستخدام.</p>
-            <a href="downloads/Gesture Control Setup.zip" class="download-button">تحميل البرنامج</a>
+
+        <!-- المشروع 2 -->
+        <div class="project-card" data-category="software">
+            <div class="project-image">
+                <i class="fa-solid fa-code"></i>
+                <span class="project-badge">متاح للتحميل</span>
+            </div>
+            <div class="project-content">
+                <h3>برنامج التحكم الذكي - Gesture Control</h3>
+                <p>برنامج متطور للتحكم في الأجهزة عبر الإنترنت باستخدام الإيماءات، يوفر واجهة مستخدم سهلة وبسيطة.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">AI</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(1)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                    <a href="downloads/Gesture Control Setup.zip" class="project-btn download-btn">
+                        <i class="fas fa-download"></i> تحميل
+                    </a>
+                </div>
+            </div>
+            <div class="project-details" id="details-1">
+                <h4 style="color: gold;"><i class="fas fa-magic"></i> مميزات البرنامج:</h4>
+                <ul style="margin-right: 20px;">
+                    <li>✓ التحكم بالكمبيوتر باستخدام حركات اليد</li>
+                    <li>✓ دعم لأنظمة Windows و Linux</li>
+                    <li>✓ تقنية الذكاء الاصطناعي لتحسين الدقة</li>
+                    <li>✓ واجهة مستخدم عربية وإنجليزية</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>متطلبات التشغيل:</strong> Windows 10/11، كاميرا ويب، 4GB RAM</p>
+            </div>
         </div>
-        <div class="project-box">
-            <i class="fa-solid fa-video"></i>
-            <h3>فيديو توضيحي قادم قريبًا</h3>
-            <p>سيتم إضافة فيديو يوضح طريقة استخدام البرنامج والمشاريع عند الانتهاء من تصويره.</p>
+
+        <!-- المشروع 3 -->
+        <div class="project-card" data-category="embedded">
+            <div class="project-image">
+                <i class="fa-solid fa-robot"></i>
+                <span class="project-badge">قيد التطوير</span>
+            </div>
+            <div class="project-content">
+                <h3>روبوت ذكي للاستكشاف</h3>
+                <p>روبوت مزود بكاميرات ومستشعرات للتنقل والاستكشاف في الأماكن الضيقة والخطرة.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Raspberry Pi</span>
+                    <span class="tech-tag">ROS</span>
+                    <span class="tech-tag">AI Vision</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(2)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                </div>
+            </div>
+            <div class="project-details" id="details-2">
+                <h4 style="color: gold;"><i class="fas fa-chart-line"></i> حالة المشروع:</h4>
+                <p>المشروع حاليًا في مرحلة التطوير المتقدمة، سيتم إطلاق النسخة التجريبية قريبًا.</p>
+                <div style="background: rgba(255,0,0,0.2); padding: 10px; border-radius: 10px; margin-top: 10px;">
+                    <p>📊 نسبة الإنجاز: 75%</p>
+                    <div style="background: #333; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 75%; background: gold; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
-    
-    <footer class="footer">
+
+        <!-- المشروع 4 -->
+        <div class="project-card" data-category="electronics">
+            <div class="project-image">
+                <i class="fa-solid fa-video"></i>
+                <span class="project-badge">مكتمل</span>
+            </div>
+            <div class="project-content">
+                <h3>نظام كاميرات مراقبة 4K</h3>
+                <p>نظام متكامل لكاميرات مراقبة عالية الدقة مع تقنية الرؤية الليلية والذكاء الاصطناعي.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">AI Detection</span>
+                    <span class="tech-tag">4K</span>
+                    <span class="tech-tag">Cloud Storage</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(3)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                </div>
+            </div>
+            <div class="project-details" id="details-3">
+                <h4 style="color: gold;"><i class="fas fa-shield-alt"></i> مواصفات النظام:</h4>
+                <ul style="margin-right: 20px;">
+                    <li>✓ دقة 4K مع رؤية ليلية حتى 50 متر</li>
+                    <li>✓ كشف تلقائي للحركة والوجوه</li>
+                    <li>✓ تخزين سحابي وآمن</li>
+                    <li>✓ تطبيق للتحكم عن بعد</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- المشروع 5 -->
+        <div class="project-card" data-category="software">
+            <div class="project-image">
+                <i class="fa-solid fa-mobile-alt"></i>
+                <span class="project-badge">قريبًا</span>
+            </div>
+            <div class="project-content">
+                <h3>تطبيق إدارة المشاريع</h3>
+                <p>تطبيق متكامل لإدارة المشاريع والفرق عن بعد مع ميزات متطورة للتخطيط والمتابعة.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Flutter</span>
+                    <span class="tech-tag">Firebase</span>
+                    <span class="tech-tag">AI</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(4)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                </div>
+            </div>
+            <div class="project-details" id="details-4">
+                <h4 style="color: gold;"><i class="fas fa-calendar-alt"></i> موعد الإطلاق:</h4>
+                <p>سيتم إطلاق التطبيق خلال الربع الثالث من 2025، يمكنك متابعة صفحتنا للحصول على آخر المستجدات.</p>
+                <div class="project-links" style="margin-top: 15px;">
+                    <a href="#" class="project-btn" style="background: gold; color: black;">
+                        <i class="fas fa-bell"></i> اشترك في الإشعارات
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- المشروع 6 -->
+        <div class="project-card" data-category="embedded">
+            <div class="project-image">
+                <i class="fa-solid fa-home"></i>
+                <span class="project-badge">مكتمل</span>
+            </div>
+            <div class="project-content">
+                <h3>نظام المنزل الذكي</h3>
+                <p>نظام متكامل للتحكم في إضاءة وأجهزة المنزل عبر الهاتف الذكي والأوامر الصوتية.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">IoT</span>
+                    <span class="tech-tag">Voice Control</span>
+                    <span class="tech-tag">ESP8266</span>
+                </div>
+                <div class="project-links">
+                    <button class="project-btn" onclick="toggleDetails(5)">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </button>
+                </div>
+            </div>
+            <div class="project-details" id="details-5">
+                <h4 style="color: gold;"><i class="fas fa-microphone-alt"></i> الميزات:</h4>
+                <ul style="margin-right: 20px;">
+                    <li>✓ التحكم عبر Alexa و Google Home</li>
+                    <li>✓ جدولة تلقائية للإضاءة والأجهزة</li>
+                    <li>✓ استشعار الحركة والحرارة</li>
+                    <li>✓ تقارير استهلاك الطاقة</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الإحصائيات -->
+    <div class="stats-section fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" id="projectsCount">0</span>
+                <span>مشروع منجز</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="happyClients">0</span>
+                <span>عميل سعيد</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="downloadsCount">0</span>
+                <span>تحميل للبرامج</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم آراء العملاء -->
+    <div class="testimonials-section fade-in">
+        <h2 class="section-title"><i class="fas fa-comments"></i> آراء عملائنا</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <i class="fas fa-star" style="color: gold; margin-bottom: 10px;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <p class="testimonial-text">"تعاملت مع A.D.Gad في مشروع تصميم دائرة إلكترونية، وكانت النتيجة أكثر من رائعة. احترافية ودقة في العمل."</p>
+                <p class="testimonial-author">- أحمد محمد, مهندس إلكترونيات</p>
+            </div>
+            <div class="testimonial-card">
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <p class="testimonial-text">"برنامج التحكم الذكي ساعدنا كثيرًا في تطوير نظامنا. دعم فني ممتاز وتحديثات مستمرة."</p>
+                <p class="testimonial-author">- سارة خالد, مديرة مشاريع</p>
+            </div>
+            <div class="testimonial-card">
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <i class="fas fa-star" style="color: gold;"></i>
+                <p class="testimonial-text">"نظام المنزل الذكي غير حياتنا اليومية. سهولة في الاستخدام وأداء ممتاز."</p>
+                <p class="testimonial-author">- محمد علي, صاحب منزل ذكي</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- التذييل -->
+    <footer class="fade-in">
         <p>&copy; 2025 جميع الحقوق محفوظة لـ A.D.Gad</p>
         <div class="social-icons">
             <a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://x.com/adgadtech" target="_blank"><i class="fa-brands fa-twitter"></i></a>
             <a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/adgadtech" target="_blank"><i class="fa-brands fa-twitter"></i></a>
             <a href="https://t.me/ADGadTech" target="_blank"><i class="fa-brands fa-telegram"></i></a>
             <a href="https://api.whatsapp.com/send/?phone=201115255682" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://www.youtube.com/@A.D.GadElectronicsCompany" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         </div>
+        <p style="font-size: 0.8rem; margin-top: 15px; color: #b3b3b3;">نفخر بتقديم أفضل الحلول التقنية لعملائنا</p>
     </footer>
-    
+
     <script>
-        function toggleDescription(index) {
-            const descriptions = document.querySelectorAll(".project-description");
-            descriptions[index].style.display = descriptions[index].style.display === "none" ? "block" : "none";
+        // تأثير ظهور العناصر
+        gsap.to(".fade-in", { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // شريط التنقل
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        // زر العودة للأعلى
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // عرض/إخفاء التفاصيل
+        function toggleDetails(index) {
+            const details = document.getElementById(`details-${index}`);
+            const allDetails = document.querySelectorAll('.project-details');
+            
+            allDetails.forEach((detail, i) => {
+                if (i !== index && detail.classList.contains('show')) {
+                    detail.classList.remove('show');
+                }
+            });
+            
+            details.classList.toggle('show');
         }
+
+        // نظام التصفية
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // تحديث حالة الأزرار
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        gsap.from(card, { duration: 0.5, scale: 0.9, opacity: 0, clearProps: "all" });
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // العد التصاعدي
+        function animateNumber(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                element.textContent = current;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNumber(document.getElementById('projectsCount'), 0, 50, 2000);
+                    animateNumber(document.getElementById('happyClients'), 0, 128, 2000);
+                    animateNumber(document.getElementById('downloadsCount'), 0, 520, 2000);
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // تأثيرات البطاقات
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { duration: 0.3, scale: 1.02, ease: "power2.out" });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, { duration: 0.3, scale: 1, ease: "power2.out" });
+            });
+        });
     </script>
 </body>
 </html>
