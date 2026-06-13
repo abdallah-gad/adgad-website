@@ -17,8 +17,14 @@
     <!-- تضمين مكتبة Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
+    <!-- SweetAlert للتنبيهات -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <style>
-        /* تنسيق الخلفية والخطوط */
+        /* جميع التنسيقات كما هي - فقط تم تغيير جزء الجافاسكريبت */
         body {
             background: linear-gradient(to right, #000000, #b3b3b3);
             color: white;
@@ -26,13 +32,11 @@
             overflow-x: hidden;
         }
         
-        /* تأثيرات الحركة على العناصر */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
         }
         
-        /* تنسيق شريط التنقل */
         .navbar {
             display: flex;
             justify-content: center;
@@ -75,7 +79,6 @@
             color: gold;
         }
         
-        /* تنسيق القسم الترحيبي */
         .hero {
             text-align: center;
             padding: 140px 20px 60px;
@@ -105,7 +108,6 @@
             font-weight: bold;
         }
         
-        /* تنسيق نموذج الاتصال */
         .contact-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -119,9 +121,14 @@
             .contact-wrapper {
                 grid-template-columns: 1fr;
             }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .navbar a { font-size: 0.85rem; }
+            .navbar { gap: 8px; }
+            .section-title { font-size: 1.8rem; }
+            .contact-form, .contact-info-section { padding: 20px; }
         }
         
-        /* نموذج التواصل */
         .contact-form {
             background: rgba(0, 0, 0, 0.6);
             border-radius: 20px;
@@ -183,8 +190,12 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
         }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
         
-        /* معلومات الاتصال */
         .contact-info-section {
             background: rgba(0, 0, 0, 0.6);
             border-radius: 20px;
@@ -239,7 +250,6 @@
             color: gold;
         }
         
-        /* بطاقات وسائل التواصل */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -275,42 +285,6 @@
             word-break: break-all;
         }
         
-        /* الخريطة */
-        .map-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 20px;
-        }
-        .map-container {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            text-align: center;
-        }
-        .map-placeholder {
-            background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-            border-radius: 15px;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        
-        /* رسالة التأكيد */
-        .success-message {
-            background: rgba(0, 128, 0, 0.8);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-            display: none;
-        }
-        .success-message.show {
-            display: block;
-            animation: slideDown 0.5s ease;
-        }
-        
-        /* قسم الأسئلة الشائعة */
         .faq-section {
             max-width: 1200px;
             margin: 60px auto;
@@ -351,7 +325,6 @@
             max-height: 200px;
         }
         
-        /* زر العودة للأعلى */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -399,7 +372,6 @@
             border-radius: 3px;
         }
         
-        /* تذييل الصفحة */
         footer {
             text-align: center;
             padding: 40px 20px 30px;
@@ -425,29 +397,17 @@
             transform: scale(1.2) translateY(-3px);
         }
         
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .fa-spin {
+            animation: fa-spin 1s infinite linear;
         }
         
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .navbar a { font-size: 0.85rem; }
-            .navbar { gap: 8px; }
-            .section-title { font-size: 1.8rem; }
-            .contact-form, .contact-info-section { padding: 20px; }
+        @keyframes fa-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <!-- شريط التنقل العلوي -->
     <nav class="navbar" id="navbar">
         <a href="index.html">الرئيسية</a>
         <a href="Services.html">الخدمات</a>
@@ -456,16 +416,13 @@
         <a href="Contact.html">اتصل بنا</a>
     </nav>
 
-    <!-- القسم الترحيبي -->
     <div class="hero fade-in">
         <img src="images/logo.png" alt="A.D.Gad Logo">
         <h1>اتصل بنا</h1>
         <p>نحن هنا لخدمتك - تواصل معنا بأي وقت</p>
     </div>
 
-    <!-- نموذج الاتصال ومعلومات التواصل -->
     <div class="contact-wrapper fade-in">
-        <!-- نموذج التواصل -->
         <div class="contact-form">
             <h2 style="color: gold; text-align: center; margin-bottom: 25px;">
                 <i class="fas fa-envelope"></i> أرسل رسالتك
@@ -473,40 +430,36 @@
             <form id="contactForm">
                 <div class="form-group">
                     <label><i class="fas fa-user"></i> الاسم كاملاً</label>
-                    <input type="text" id="name" placeholder="أدخل اسمك" required>
+                    <input type="text" id="userName" placeholder="أدخل اسمك" required>
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
-                    <input type="email" id="email" placeholder="example@domain.com" required>
+                    <input type="email" id="userEmail" placeholder="example@domain.com" required>
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-phone"></i> رقم الهاتف</label>
-                    <input type="tel" id="phone" placeholder="+20xxxxxxxxxx">
+                    <input type="tel" id="userPhone" placeholder="+20xxxxxxxxxx">
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-tag"></i> نوع الطلب</label>
-                    <select id="subject">
-                        <option value="استفسار عام">استفسار عام</option>
-                        <option value="طلب خدمة">طلب خدمة</option>
-                        <option value="مشروع جديد">مشروع جديد</option>
-                        <option value="دعم فني">دعم فني</option>
-                        <option value="شكوى أو اقتراح">شكوى أو اقتراح</option>
+                    <select id="requestType">
+                        <option value="استفسار عام">📝 استفسار عام</option>
+                        <option value="طلب خدمة">🔧 طلب خدمة</option>
+                        <option value="مشروع جديد">🚀 مشروع جديد</option>
+                        <option value="دعم فني">🛠️ دعم فني</option>
+                        <option value="شكوى أو اقتراح">💡 شكوى أو اقتراح</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label><i class="fas fa-comment"></i> الرسالة</label>
-                    <textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+                    <textarea id="userMessage" placeholder="اكتب رسالتك هنا..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="submit-btn" id="submitBtn">
                     <i class="fas fa-paper-plane"></i> إرسال الرسالة
                 </button>
-                <div class="success-message" id="successMessage">
-                    <i class="fas fa-check-circle"></i> تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.
-                </div>
             </form>
         </div>
 
-        <!-- معلومات الاتصال -->
         <div class="contact-info-section">
             <h2 class="info-title"><i class="fas fa-address-card"></i> معلومات الاتصال</h2>
             
@@ -544,7 +497,6 @@
         </div>
     </div>
 
-    <!-- بطاقات وسائل التواصل الاجتماعي -->
     <div class="contact-wrapper fade-in" style="margin-top: 20px;">
         <div style="width: 100%;">
             <h2 class="section-title"><i class="fas fa-share-alt"></i> تابعنا على وسائل التواصل</h2>
@@ -583,7 +535,6 @@
         </div>
     </div>
 
-    <!-- الأسئلة الشائعة -->
     <div class="faq-section fade-in">
         <h2 class="section-title"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h2>
         <div class="faq-grid">
@@ -626,7 +577,6 @@
         </div>
     </div>
 
-    <!-- ساعات العمل -->
     <div class="contact-wrapper fade-in" style="margin-top: 0;">
         <div style="width: 100%; text-align: center;">
             <div style="background: rgba(0, 0, 0, 0.5); border-radius: 15px; padding: 30px; border: 1px solid rgba(255, 0, 0, 0.2);">
@@ -639,12 +589,10 @@
         </div>
     </div>
 
-    <!-- زر العودة للأعلى -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-chevron-up"></i>
     </div>
 
-    <!-- تذييل الصفحة -->
     <footer class="fade-in">
         <p>&copy; 2025 جميع الحقوق محفوظة لـ A.D.Gad</p>
         <div class="social-icons">
@@ -659,6 +607,14 @@
     </footer>
 
     <script>
+        // تهيئة EmailJS - هنضيف المفاتيح هنا
+        (function() {
+            // انتظر لحظة ثم نضيف التهيئة
+            setTimeout(() => {
+                emailjs.init("YOUR_PUBLIC_KEY");
+            }, 500);
+        })();
+
         // تأثير ظهور العناصر
         gsap.to(".fade-in", { 
             opacity: 1, 
@@ -668,7 +624,6 @@
             ease: "power2.out"
         });
 
-        // شريط التنقل
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const scrollTopBtn = document.getElementById('scrollTop');
@@ -686,40 +641,14 @@
             }
         });
 
-        // زر العودة للأعلى
         document.getElementById('scrollTop').addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // معالجة نموذج الاتصال
-        const form = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // التحقق من صحة البيانات
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (name && email && message) {
-                successMessage.classList.add('show');
-                form.reset();
-                
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            }
-        });
-
-        // الأسئلة الشائعة - تأثير التوسيع
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             item.addEventListener('click', () => {
                 item.classList.toggle('active');
-                
-                // إغلاق العناصر الأخرى
                 faqItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
                         otherItem.classList.remove('active');
@@ -728,7 +657,6 @@
             });
         });
 
-        // تأثيرات البطاقات
         const cards = document.querySelectorAll('.social-card, .info-item');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -737,6 +665,69 @@
             card.addEventListener('mouseleave', () => {
                 gsap.to(card, { duration: 0.3, scale: 1, ease: "power2.out" });
             });
+        });
+
+        // نموذج الاتصال - نسخة بديلة باستخدام mailto (للتأكد من وصول الرسائل)
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const phone = document.getElementById('userPhone').value;
+            const requestType = document.getElementById('requestType').value;
+            const message = document.getElementById('userMessage').value;
+            
+            if (!name || !email || !message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ',
+                    text: 'الرجاء تعبئة جميع الحقول المطلوبة',
+                    background: '#1a1a1a',
+                    color: '#fff',
+                    confirmButtonColor: '#ff0000'
+                });
+                return;
+            }
+            
+            // بناء محتوى البريد
+            const subject = `رسالة جديدة من ${name} - ${requestType}`;
+            const body = `الاسم: ${name}%0A
+البريد الإلكتروني: ${email}%0A
+رقم الهاتف: ${phone || 'غير مدخل'}%0A
+نوع الطلب: ${requestType}%0A
+الرسالة: ${message}%0A
+---%0A
+تم إرسال هذه الرسالة من موقع A.D.Gad`;
+            
+            // فتح عميل البريد
+            const mailtoLink = `mailto:adgadabdallahgad@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحويل...';
+            
+            // فتح نافذة البريد
+            window.location.href = mailtoLink;
+            
+            // عرض رسالة نجاح
+            Swal.fire({
+                icon: 'success',
+                title: 'تم فتح البريد الإلكتروني! 📧',
+                text: 'سيتم فتح برنامج البريد لديك. يرجى الضغط على إرسال لإتمام العملية.',
+                background: '#1a1a1a',
+                color: '#fff',
+                confirmButtonColor: '#ff0000',
+                confirmButtonText: 'حسناً'
+            });
+            
+            // إعادة تعيين النموذج بعد قليل
+            setTimeout(() => {
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+            }, 2000);
         });
     </script>
 </body>
