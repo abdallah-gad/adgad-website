@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A.D.Gad - معرض أعمالنا: مواقع إلكترونية، لوجوهات، برامج محاسبة، وحلول رقمية متكاملة">
+    <meta name="keywords" content="معرض أعمال, إلكترونيات, برمجيات, لوجوهات, A.D.Gad">
+    <title>A.D.Gad | معرض الأعمال - إنجازاتنا وأعمالنا</title>
+    
+    <!-- تضمين مكتبة Tailwind CSS لتنسيق الصفحة -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تضمين مكتبة GSAP لإنشاء تأثيرات الحركة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- تضمين مكتبة Font Awesome لإضافة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* تنسيق الخلفية والخطوط - نفس الهوية البصرية */
+        body {
+            background: linear-gradient(to right, #000000, #b3b3b3);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* تأثيرات الحركة على العناصر */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* تنسيق شريط التنقل */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 2px 15px rgba(255, 0, 0, 0.6);
+        }
+        .navbar a {
+            color: white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+        }
+        .navbar a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: gold;
+            transition: width 0.3s ease;
+        }
+        .navbar a:hover::before {
+            width: 100%;
+        }
+        .navbar a:hover {
+            color: gold;
+        }
+        
+        /* تنسيق القسم الترحيبي */
+        .hero {
+            text-align: center;
+            padding: 140px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+        .hero img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 2px 2px 15px gold;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* عنوان القسم */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 1px 1px 10px gold;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000, gold);
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+        
+        /* أزرار التصفية */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 20px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff0000;
+            border-color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* شبكة المشاريع */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* بطاقة المشروع */
+        .project-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: gold;
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.3);
+        }
+        .project-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .project-preview i {
+            font-size: 4rem;
+            color: gold;
+            transition: 0.3s;
+        }
+        .project-card:hover .project-preview i {
+            transform: scale(1.1);
+            color: #ff0000;
+        }
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff0000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .project-content {
+            padding: 20px;
+        }
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: gold;
+        }
+        .project-content p {
+            line-height: 1.6;
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .tech-tag {
+            background: rgba(255, 0, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ff0000;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        .project-link:hover {
+            background: gold;
+            color: black;
+            gap: 12px;
+        }
+        
+        /* شبكة اللوجوهات */
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .logo-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        .logo-card:hover {
+            transform: translateY(-8px);
+            border-color: gold;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+        }
+        .logo-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .logo-card h4 {
+            color: gold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        .logo-card p {
+            color: #b3b3b3;
+            font-size: 0.8rem;
+        }
+        
+        /* قسم برنامج المحاسبة */
+        .software-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        .software-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .software-header i {
+            font-size: 3rem;
+            color: gold;
+        }
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .feature i {
+            color: gold;
+            font-size: 1.2rem;
+        }
+        
+        /* زر العودة للأعلى */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background: gold;
+            color: black;
+            transform: translateY(-5px);
+        }
+        
+        /* تذييل الصفحة */
+        footer {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: rgba(0, 0, 0, 0.95);
+            position: relative;
+            z-index: 10;
+            margin-top: 60px;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .social-icons a {
+            color: white;
+            font-size: 2rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        .social-icons a:hover {
+            color: gold;
+            transform: scale(1.2) translateY(-3px);
+        }
+        
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .navbar a {
+                font-size: 0.85rem;
+            }
+            .navbar {
+                gap: 8px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            .logos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="Services.html">الخدمات</a>
+        <a href="Projects.html">المشاريع</a>
+        <a href="about.html">من نحن</a>
+        <a href="Contact.html">اتصل بنا</a>
+        <a href="portfolio.html" class="active">معرض الأعمال</a>
+    </nav>
+
+    <!-- القسم الترحيبي -->
+    <div class="hero fade-in">
+        <img src="images/logo.png" alt="A.D.Gad Logo">
+        <h1>🏆 معرض أعمالنا</h1>
+        <p>نفخر بتقديم إبداعاتنا لشركائنا وعملائنا</p>
+    </div>
+
+    <!-- أزرار التصفية -->
+    <div class="filter-buttons fade-in">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="website">مواقع إلكترونية</button>
+        <button class="filter-btn" data-filter="interactive">مواقع تفاعلية</button>
+        <button class="filter-btn" data-filter="software">برامج</button>
+    </div>
+
+    <!-- شبكة المشاريع -->
+    <div class="portfolio-grid fade-in" id="portfolioGrid">
+        
+        <!-- موقع A.D.Gad -->
+        <div class="project-card" data-category="website">
+            <div class="project-preview">
+                <i class="fas fa-globe-africa"></i>
+                <span class="project-badge">موقع شركة</span>
+            </div>
+            <div class="project-content">
+                <h3>A.D.Gad - الموقع الرسمي</h3>
+                <p>الموقع الرسمي لشركة A.D.Gad للإلكترونيات والبرمجيات، يعرض خدمات الشركة ومشاريعها.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">GSAP</span>
+                </div>
+                <a href="#" class="project-link">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        
+        <!-- معرض نبته تكس -->
+        <div class="project-card" data-category="website">
+            <div class="project-preview">
+                <i class="fas fa-tshirt"></i>
+                <span class="project-badge">معرض أقمشة</span>
+            </div>
+            <div class="project-content">
+                <h3>معرض نبته تكس - الأقمشة</h3>
+                <p>موقع متخصص في عرض الأقمشة ومنتجات النسيج، بتصميم عصري وجذاب.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="https://abdallah-gad.github.io/nabta-tex/" target="_blank" class="project-link">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        
+        <!-- اتقان أكاديمي -->
+        <div class="project-card" data-category="website">
+            <div class="project-preview">
+                <i class="fas fa-mosque"></i>
+                <span class="project-badge">أكاديمية تعليمية</span>
+            </div>
+            <div class="project-content">
+                <h3>اتقان أكاديمي - تعليم القرآن</h3>
+                <p>منصة متخصصة في تعليم القرآن الكريم والتجويد، بتصميم روحاني وجذاب.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="https://abdallah-gad.github.io/atqan-academy/" target="_blank" class="project-link">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        
+        <!-- شركة أبو محمود -->
+        <div class="project-card" data-category="website">
+            <div class="project-preview">
+                <i class="fas fa-building"></i>
+                <span class="project-badge">مقاولات - الكويت</span>
+            </div>
+            <div class="project-content">
+                <h3>شركة أبو محمود - الكويت</h3>
+                <p>موقع رسمي لشركة تركيب السراميك والمقاولات في الكويت، يعرض الخدمات والمشاريع.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="https://abdallah-gad.github.io/almwafy/" target="_blank" class="project-link">زيارة الموقع <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        
+        <!-- اختبار إنجليزي وطبى -->
+        <div class="project-card" data-category="interactive">
+            <div class="project-preview">
+                <i class="fas fa-language"></i>
+                <span class="project-badge">اختبار تفاعلي</span>
+            </div>
+            <div class="project-content">
+                <h3>بنك أسئلة - إنجليزي وطبى</h3>
+                <p>موقع تفاعلي لاختبار الطلاب في اللغة الإنجليزية والمصطلحات الطبية.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="https://abdallah-gad.github.io/Bank---medical/" target="_blank" class="project-link">تجربة الاختبار <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+        
+        <!-- اختبار كيمياء -->
+        <div class="project-card" data-category="interactive">
+            <div class="project-preview">
+                <i class="fas fa-atom"></i>
+                <span class="project-badge">اختبار كيمياء</span>
+            </div>
+            <div class="project-content">
+                <h3>اختبار الكيمياء التفاعلي</h3>
+                <p>موقع اختبار تفاعلي لطلاب الجامعة في مادة الكيمياء.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+                <a href="https://abdallah-gad.github.io/Chemistry-Exam-1/" target="_blank" class="project-link">تجربة الاختبار <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+
+<!-- قسم اللوجوهات المصممة -->
+<div class="fade-in">
+    <h2 class="section-title">
+        <i class="fas fa-paintbrush"></i> لوجوهات صممناها
+    </h2>
+
+    <div class="logos-grid">
+
+        <div class="logo-card">
+            <img src="images/logo.png" class="logo-img">
+            <h4>A.D.Gad</h4>
+            <p>هوية الشركة الإلكترونية</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/nabta.png" class="logo-img">
+            <h4>نبته تكس</h4>
+            <p>معرض أقمشة</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/rody.png" class="logo-img">
+            <h4>رودي تكس</h4>
+            <p>معرض اقمشة</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/itqan.png" class="logo-img">
+            <h4>اتقان أكاديمي</h4>
+            <p>تعليم القرآن الكريم</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/abuHsham.png" class="logo-img">
+            <h4>أبو هشام</h4>
+            <p>مصنع ملابس رياضيه</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/abumahmoud.png" class="logo-img">
+            <h4>أبو محمود</h4>
+            <p>مقاولات الكويت</p>
+        </div>
+
+        <div class="logo-card">
+            <img src="images/Kased Cream.png" class="logo-img">
+            <h4>قاصد كريم</h4>
+            <p>محل ايس كريم</p>
+        </div>
+
+    </div>
+</div>
+
+    <!-- قسم برنامج المحاسبة -->
+    <div class="software-section fade-in">
+        <div class="software-header">
+            <i class="fas fa-calculator"></i>
+            <h2 style="color: gold; margin-top: 15px;">برنامج نبته تكس للمحاسبة</h2>
+            <p style="color: #b3b3b3;">نظام محاسبي متكامل تم تطويره خصيصاً لمعرض نبته تكس للأقمشة</p>
+        </div>
+        <div class="features-list">
+            <div class="feature"><i class="fas fa-check-circle"></i> إدارة العملاء والموردين</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> إدارة المخزون والمنتجات</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> الفواتير والتقارير المالية</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> تصدير إلى Excel و PDF</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> متابعة المديونيات والسداد</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> دعم البيع نقدي وآجل</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> إدارة التوبات والأوزان</div>
+            <div class="feature"><i class="fas fa-check-circle"></i> تقارير مبيعات متعددة</div>
+        </div>
+        <p style="text-align: center; margin-top: 25px; color: gold;">⚙️ تم تطويره باستخدام: Python, Tkinter, SQLite, Pandas, Matplotlib, FPDF</p>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- التذييل -->
+    <footer class="fade-in">
+        <p>&copy; 2025 جميع الحقوق محفوظة لـ A.D.Gad | تصميم وتطوير شركة الإلكترونيات والبرمجيات</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/adgadtech" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://t.me/ADGadTech" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://api.whatsapp.com/send/?phone=201115255682" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@A.D.GadElectronicsCompany" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 15px; color: #b3b3b3;">نفخر بتقديم أفضل الحلول التقنية لعملائنا في مصر والكويت والعالم العربي</p>
+    </footer>
+
+    <script>
+        // تأثير ظهور العناصر
+        gsap.to(".fade-in", { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+        
+        // شريط التنقل
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+        
+        // زر العودة للأعلى
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // فلتر المشاريع
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                projects.forEach(project => {
+                    if (filter === 'all' || project.getAttribute('data-category') === filter) {
+                        project.style.display = 'block';
+                        gsap.from(project, { duration: 0.5, scale: 0.95, opacity: 0, clearProps: "all" });
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // تأثير hover للبطاقات
+        const cards = document.querySelectorAll('.project-card, .logo-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { duration: 0.3, scale: 1.02, ease: "power2.out" });
+            });
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, { duration: 0.3, scale: 1, ease: "power2.out" });
+            });
+        });
+    </script>
+</body>
+</html>
