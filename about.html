@@ -34,26 +34,77 @@
         
         /* تنسيق شريط التنقل - نفس النمط */
         .navbar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar a {
-            color: white;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .navbar a:hover {
-            color: gold;
-        }
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 10px;
+    background: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    padding: 8px 10px;
+    background: rgba(0, 0, 0, 0.98);
+    box-shadow: 0 2px 15px rgba(255, 0, 0, 0.6);
+}
+
+.navbar a {
+    color: white;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+    padding: 5px 8px;
+    white-space: nowrap;
+}
+
+.navbar a::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: gold;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::before {
+    width: 100%;
+}
+
+.navbar a:hover {
+    color: gold;
+}
+
+/* للشاشات الكبيرة */
+@media (min-width: 992px) {
+    .navbar a {
+        font-size: 1.2rem;
+        padding: 5px 0;
+    }
+    .navbar {
+        gap: 20px;
+        padding: 15px;
+    }
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 480px) {
+    .navbar a {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+    }
+    .navbar {
+        gap: 5px;
+    }
+}
         
         /* تنسيق القسم الترحيبي */
         .hero {
@@ -447,7 +498,16 @@
             stagger: 0.2,
             ease: "power2.out"
         });
-        
+
+        window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
         // تأثير إضافي للبطاقات عند التمرير
         const cards = document.querySelectorAll('.content-card, .founder-section, .achievement-item');
         cards.forEach(card => {
