@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A.D.Gad - شركة رائدة في مجال الإلكترونيات والبرمجيات، نقدم حلولاً تقنية متطورة">
+    <meta name="keywords" content="إلكترونيات, برمجيات, أنظمة مدمجة, PCB, دوائر إلكترونية, A.D.Gad">
+    <title>A.D.Gad | عالم الابتكار والإبداع - مستقبل التكنولوجيا يبدأ هنا</title>
+    
+    <!-- تضمين مكتبة Tailwind CSS لتنسيق الصفحة -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تضمين مكتبة GSAP لإنشاء تأثيرات الحركة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- تضمين مكتبة Font Awesome لإضافة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* تنسيق الخلفية والخطوط */
+        body {
+            background: linear-gradient(to right, #000000, #b3b3b3);
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* تأثيرات الحركة على العناصر */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* ========== تنسيق شريط التنقل ========== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+        }
+
+        /* اللوجو - أيقونة فقط */
+        .logo {
+            color: #ff0000;
+            font-size: 2rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .logo:hover {
+            color: gold;
+            transform: scale(1.05);
+        }
+
+        /* اللينكات */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: 0.3s;
+            font-weight: 500;
+            padding: 5px 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: gold;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: gold;
+        }
+
+        /* زر القائمة (☰) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            text-align: center;
+        }
+
+        .menu-toggle:hover {
+            color: gold;
+        }
+
+        .menu-toggle.open i {
+            transform: rotate(90deg);
+            transition: 0.3s;
+        }
+
+        /* ========== القسم الترحيبي - حجم أصغر ومتناسق ========== */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+            z-index: 10;
+            min-height: auto;
+        }
+        
+        .hero img {
+            width: 120px;
+            height: auto;
+            margin-bottom: 5px;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 2px 2px 15px gold;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            font-weight: bold;
+            opacity: 0.9;
+        }
+        
+        /* أزرار الدعوة */
+        .cta-buttons {
+            margin-top: 25px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin: 8px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            background: #ff0000;
+            color: white;
+            border-radius: 50px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .cta-button:hover {
+            background: gold;
+            color: black;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+            transform: translateY(-3px);
+        }
+        
+        /* بطاقات الخدمات */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 1px 1px 10px gold;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff0000, gold);
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+        
+        .services-grid, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .service-card, .project-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        
+        .service-card:hover, .project-card:hover {
+            transform: translateY(-10px);
+            border-color: gold;
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.3);
+        }
+        
+        .service-icon, .project-icon {
+            font-size: 3.5rem;
+            color: #ff0000;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        
+        .service-card:hover .service-icon,
+        .project-card:hover .project-icon {
+            color: gold;
+            transform: scale(1.1);
+        }
+        
+        .service-card h3, .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: gold;
+        }
+        
+        .service-card p, .project-card p {
+            line-height: 1.6;
+            color: #ddd;
+        }
+        
+        /* قسم الإحصائيات */
+        .stats-section {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 60px 20px;
+            margin: 50px 0;
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: gold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-top: 10px;
+        }
+        
+        /* قسم المميزات */
+        .features-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+        
+        .feature-item h4 {
+            font-size: 1.3rem;
+            color: gold;
+            margin-bottom: 10px;
+        }
+        
+        /* زر العودة للأعلى */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: gold;
+            color: black;
+            transform: translateY(-5px);
+        }
+        
+        /* تذييل الصفحة - بدون روابط تنقل */
+        footer {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: rgba(0, 0, 0, 0.95);
+            position: relative;
+            z-index: 10;
+            margin-top: 60px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 2rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: gold;
+            transform: scale(1.2) translateY(-3px);
+        }
+        
+        /* ========== تحسينات الموبايل ========== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                z-index: 1100;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 60px);
+                background: rgba(0, 0, 0, 0.97);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 25px;
+                padding: 40px 20px;
+                transition: right 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                z-index: 1050;
+                border-right: 2px solid rgba(255, 0, 0, 0.5);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+            
+            .hero {
+                padding: 90px 20px 50px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero img {
+                width: 90px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* منع التمرير خلف القائمة المفتوحة */
+        body.menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <!-- اللوجو: أيقونة فقط (بدون اسم مكتوب) -->
+        <div class="logo">
+            <i class="fas fa-microchip"></i>
+        </div>
+
+        <!-- زر القائمة (☰) -->
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- قائمة الروابط -->
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">الرئيسية</a>
+            <a href="Services.html">الخدمات</a>
+            <a href="Projects.html">المشاريع</a>
+            <a href="portfolio.html">معرض الأعمال</a>
+            <a href="about.html">من نحن</a>
+            <a href="Contact.html">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <!-- القسم الترحيبي - حجم أصغر ومتناسق -->
+    <!-- القسم الترحيبي -->
+    <div class="hero fade-in">
+        <img src="images/logo.png" alt="A.D.Gad Logo">
+        <h1>A.D.Gad | مستقبل التكنولوجيا يبدأ هنا!</h1>
+        <p>نقدم لك أحدث الحلول البرمجية والإلكترونية بلمسة احترافية</p>
+        <div class="cta-buttons">
+            <a href="Services.html" class="cta-button"><i class="fas fa-cogs"></i> استكشف خدماتنا</a>
+            <a href="Projects.html" class="cta-button"><i class="fas fa-project-diagram"></i> استكشف مشاريعنا</a>
+            <a href="Contact.html" class="cta-button"><i class="fas fa-headset"></i> تواصل معنا</a>
+        </div>
+    </div>
+
+    <!-- قسم الخدمات -->
+    <div class="services-section fade-in">
+        <h2 class="section-title"><i class="fas fa-star-of-life"></i> خدماتنا المميزة</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-microchip"></i></div>
+                <h3>الأنظمة المدمجة</h3>
+                <p>تصميم وتطوير أنظمة مدمجة ذكية باستخدام أحدث التقنيات والمكونات الإلكترونية.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-charging-station"></i></div>
+                <h3>الدوائر الإلكترونية</h3>
+                <p>تصميم لوحات الدوائر المطبوعة (PCB) وتحليل الدوائر الإلكترونية المتقدمة.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>البرمجيات والحلول</h3>
+                <p>تطوير تطبيقات وبرامج مخصصة لتلبية احتياجات عملائنا المختلفة.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-video"></i></div>
+                <h3>كاميرات المراقبة</h3>
+                <p>توريد وتركيب أنظمة المراقبة المتطورة وأجهزة الأمن والسلامة.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الإحصائيات -->
+    <div class="stats-section fade-in">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number" id="projectsCount">0</span>
+                <span class="stat-label">مشروع منجز</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="clientsCount">0</span>
+                <span class="stat-label">عميل سعيد</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="countriesCount">0</span>
+                <span class="stat-label">دولة نعمل بها</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="expertsCount">0</span>
+                <span class="stat-label">خبير تقني</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم المميزات -->
+    <div class="features-section fade-in">
+        <h2 class="section-title"><i class="fas fa-gem"></i> لماذا تختار A.D.Gad؟</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-medal"></i></div>
+                <h4>جودة عالية</h4>
+                <p>نلتزم بأعلى معايير الجودة في جميع مشاريعنا</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <h4>التزام بالمواعيد</h4>
+                <p>نحترم مواعيد تسليم المشاريع بدقة</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h4>دعم فني 24/7</h4>
+                <p>فريق دعم متخصص لمساعدتك في أي وقت</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                <h4>حلول مبتكرة</h4>
+                <p>نقدم أحدث الحلول التقنية المبتكرة</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم المشاريع المميزة -->
+    <div class="projects-section fade-in">
+        <h2 class="section-title"><i class="fas fa-trophy"></i> أحدث مشاريعنا</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-robot"></i></div>
+                <h3>نظام تحكم ذكي</h3>
+                <p>تطوير نظام تحكم متكامل للمنشآت الصناعية باستخدام الذكاء الاصطناعي</p>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>كاميرات مراقبة 4K</h3>
+                <p>تركيب نظام مراقبة متكامل بدقة 4K لكبرى الشركات</p>
+            </div>
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>تطبيق إدارة ذكي</h3>
+                <p>تصميم تطبيق متكامل لإدارة المشاريع والفرق عن بعد</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="Projects.html" class="cta-button" style="padding: 12px 30px; font-size: 1rem;">
+                <i class="fas fa-arrow-left"></i> عرض كل المشاريع
+            </a>
+        </div>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- التذييل - بدون روابط تنقل (تم إزالتها) -->
+    <footer class="fade-in">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61571597246257" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/a_d_gad_electronics/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/adgadtech" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://t.me/ADGadTech" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://api.whatsapp.com/send/?phone=201115255682&text&type=phone_number&app_absent=0" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@A.D.GadElectronicsCompany" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p style="margin-top: 25px;">&copy; 2025 جميع الحقوق محفوظة لـ A.D.Gad</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #b3b3b3;">شركة رائدة في مجال الإلكترونيات والبرمجيات</p>
+    </footer>
+    
+    <script>
+        // تأثير ظهور العناصر
+        gsap.to(".fade-in", { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // تحسينات القائمة (المينيو)
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const body = document.body;
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('open');
+                    
+                    if (navLinks.classList.contains('active')) {
+                        body.classList.add('menu-open');
+                    } else {
+                        body.classList.remove('menu-open');
+                    }
+                });
+            }
+
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    body.classList.remove('menu-open');
+                });
+            });
+
+            document.addEventListener('click', (event) => {
+                if (navLinks.classList.contains('active') && 
+                    !navLinks.contains(event.target) && 
+                    !menuToggle.contains(event.target)) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('open');
+                    body.classList.remove('menu-open');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrollTopBtn = document.getElementById('scrollTop');
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function animateNumber(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+        }
+
+        const projectsCount = document.getElementById('projectsCount');
+        const clientsCount = document.getElementById('clientsCount');
+        const countriesCount = document.getElementById('countriesCount');
+        const expertsCount = document.getElementById('expertsCount');
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateNumber(projectsCount, 0, 50, 2000);
+                    animateNumber(clientsCount, 0, 128, 2000);
+                    animateNumber(countriesCount, 0, 10, 2000);
+                    animateNumber(expertsCount, 0, 15, 2000);
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(document.querySelector('.stats-section'));
+    </script>
+</body>
+</html>
