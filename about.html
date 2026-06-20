@@ -32,6 +32,78 @@
             transform: translateY(20px);
         }
         
+        /* تنسيق الاسم الذهبي مع تأثير لامع */
+        .gold-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700, #FFEC8B);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShine 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .gold-name-small {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700, #FFEC8B);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShine 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            display: inline-block;
+        }
+        
+        .gold-name-hero {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700, #FFEC8B, #FFD700);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShine 2.5s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .gold-name-hero::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            font-size: 1.5rem;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+        
+        .gold-name-hero::before {
+            content: '👑';
+            position: absolute;
+            top: -10px;
+            left: -40px;
+            font-size: 1.5rem;
+            animation: sparkle 1.5s ease-in-out infinite 0.5s;
+        }
+        
+        @keyframes goldShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.3) rotate(20deg); opacity: 0.7; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
         /* تنسيق شريط التنقل */
         .navbar {
             display: flex;
@@ -164,6 +236,23 @@
             max-width: 1000px;
             border: 1px solid rgba(255, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .founder-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.03) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .founder-section:hover {
             transform: translateY(-5px);
@@ -174,6 +263,8 @@
         .founder-img-container {
             flex-shrink: 0;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         .founder-img {
             width: 280px;
@@ -188,12 +279,15 @@
         .founder-img:hover {
             border-color: gold;
             transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
         }
         
         .founder-text {
             flex: 1;
             text-align: center;
             min-width: 250px;
+            position: relative;
+            z-index: 1;
         }
         .founder-text h2 {
             color: #ff0000;
@@ -254,6 +348,16 @@
         .badge-cyan:hover {
             background: gold;
             color: black;
+        }
+        .badge-gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+        }
+        .badge-gold:hover {
+            background: #ff0000;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
         }
         
         /* تنسيق الجدول الزمني للإنجازات */
@@ -594,6 +698,13 @@
             .timeline-content {
                 max-width: 100%;
             }
+            .gold-name-hero {
+                font-size: 2.5rem;
+            }
+            .gold-name-hero::after,
+            .gold-name-hero::before {
+                display: none;
+            }
         }
         
         @media (max-width: 480px) {
@@ -607,6 +718,12 @@
             }
             .badge-container {
                 gap: 8px;
+            }
+            .gold-name {
+                font-size: 1.3rem;
+            }
+            .gold-name-hero {
+                font-size: 2rem;
             }
         }
     </style>
@@ -639,7 +756,7 @@
         </p>
     </div>
 
-    <!-- قسم المؤسس -->
+    <!-- قسم المؤسس - مع الاسم الذهبي -->
     <div class="founder-section fade-in">
         <div class="founder-img-container">
             <img src="images/founder.jpg" alt="المهندس عبدالله جاد" class="founder-img">
@@ -647,7 +764,7 @@
         <div class="founder-text">
             <h2><i class="fas fa-user-tie"></i> المؤسس والمدير التنفيذي</h2>
             <p style="font-size: 1.1rem; line-height: 1.8;">
-                <span class="highlight-red" style="font-size: 1.3rem;">المهندس عبدالله جاد</span><br>
+                <span class="gold-name">المهندس عبدالله جاد</span><br>
                 <span class="highlight-cyan">طالب بالمعهد العالي للعلوم الصحية التطبيقية - شربين</span><br>
                 <span style="color: #aaa;">قسم صيانة الأجهزة الطبية</span>
             </p>
@@ -659,12 +776,13 @@
                 <span class="badge"><i class="fas fa-star"></i> الطالب المثالي 2025</span>
                 <span class="badge badge-green"><i class="fas fa-building"></i> معرض التعليم الفني 2025</span>
                 <span class="badge badge-purple"><i class="fas fa-building"></i> معرض التعليم الفني 2026</span>
-                <span class="badge badge-cyan"><i class="fas fa-graduation-cap"></i> معهد صحة - صيانة أجهزة طبية</span>
+                <span class="badge badge-cyan"><i class="fas fa-graduation-cap"></i> معهد العلوم الصحية - صيانة أجهزة طبية</span>
             </div>
             
             <p style="line-height: 1.8; margin-top: 15px;">
-                يتمتع بخبرة واسعة في تصميم الدوائر الإلكترونية، تطوير الأنظمة المدمجة، وبرمجة الحلول الذكية.
-                يسعى دائمًا للابتكار وتحقيق أعلى معايير الجودة في جميع المشاريع التقنية التي تقدمها الشركة.
+                يتمتع <span class="gold-name-small">المهندس عبدالله جاد</span> بخبرة واسعة في تصميم الدوائر الإلكترونية، 
+                تطوير الأنظمة المدمجة، وبرمجة الحلول الذكية. يسعى دائمًا للابتكار وتحقيق أعلى معايير الجودة 
+                في جميع المشاريع التقنية التي تقدمها الشركة.
             </p>
         </div>
     </div>
@@ -672,7 +790,7 @@
     <!-- المسيرة التعليمية -->
     <div class="content-card fade-in">
         <h2 style="text-align: center; color: gold; margin-bottom: 30px;">
-            <i class="fas fa-graduation-cap"></i> المسيرة التعليمية
+            <i class="fas fa-graduation-cap"></i> المسيرة التعليمية لـ <span class="gold-name-small">المهندس عبدالله جاد</span>
         </h2>
         <div class="education-timeline">
             <div class="edu-step">
@@ -680,7 +798,7 @@
                 <div class="step-title">🎓 الثانوية الفنية للتدريب والتعليم المزدوج</div>
                 <div class="step-desc">
                     قسم <span class="highlight-red">الإلكترونيات الصناعية</span><br>
-                    <span style="color: #aaa;">حصلت على المركز الثالث على مستوى المدرسة</span>
+                    <span style="color: #aaa;">حصل <span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> على المركز الثالث على مستوى المدرسة</span>
                 </div>
             </div>
             <div class="edu-step" style="border-right-color: gold;">
@@ -688,12 +806,12 @@
                 <div class="step-title">🏛️ المعهد العالي للعلوم الصحية التطبيقية - شربين</div>
                 <div class="step-desc">
                     قسم <span class="highlight-cyan">صيانة الأجهزة الطبية</span><br>
-                    <span style="color: #aaa;">مرحلة جديدة في مسيرة التميز الأكاديمي</span>
+                    <span style="color: #aaa;"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> في مرحلة جديدة من التميز الأكاديمي</span>
                 </div>
             </div>
             <div class="edu-step" style="border-right-color: #00bcd4;">
                 <div class="step-year">📅 المستقبل</div>
-                <div class="step-title">🚀 طموحات وأهداف</div>
+                <div class="step-title">🚀 طموحات وأهداف <span class="gold-name-small">م/ عبدالله جاد</span></div>
                 <div class="step-desc">
                     <span class="highlight-gold">التخصص في صيانة وتطوير الأجهزة الطبية</span><br>
                     <span style="color: #aaa;">دمج خبرات الإلكترونيات مع صيانة الأجهزة الطبية</span>
@@ -705,7 +823,7 @@
     <!-- قسم المعارض والمحافظين -->
     <div class="content-card fade-in">
         <h2 style="text-align: center; color: gold; margin-bottom: 30px;">
-            <i class="fas fa-landmark"></i> مشاركاتنا في معارض التعليم الفني
+            <i class="fas fa-landmark"></i> مشاركات <span class="gold-name-small">المهندس عبدالله جاد</span> في معارض التعليم الفني
         </h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
             
@@ -716,7 +834,7 @@
                 </div>
                 <h3 style="color: #ff0000; font-size: 1.3rem;">معرض مخرجات التعليم الفني 2025</h3>
                 <p style="margin: 10px 0; line-height: 1.8;">
-                    تم عرض مشروعي على <span class="gov-name">اللواء أشرف الجندي</span><br>
+                    تم عرض مشروع <span class="gold-name-small">م/ عبدالله جاد</span> على <span class="gov-name">اللواء أشرف الجندي</span><br>
                     <span style="color: #aaa; font-size: 0.9rem;">محافظ الغربية السابق</span>
                 </p>
                 <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
@@ -733,7 +851,7 @@
                 </div>
                 <h3 style="color: #ff0000; font-size: 1.3rem;">معرض مخرجات التعليم الفني 2026</h3>
                 <p style="margin: 10px 0; line-height: 1.8;">
-                    تم عرض مشروعي على <span class="gov-name">اللواء علاء عبدالمعطي</span><br>
+                    تم عرض مشروع <span class="gold-name-small">م/ عبدالله جاد</span> على <span class="gov-name">اللواء علاء عبدالمعطي</span><br>
                     <span style="color: #aaa; font-size: 0.9rem;">محافظ الغربية الحالي</span>
                 </p>
                 <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
@@ -749,7 +867,7 @@
             <p style="font-size: 1.1rem;">
                 <i class="fas fa-award" style="color: gold;"></i>
                 <span class="highlight-gold">إنجاز فريد:</span> 
-                عرض مشاريعي أمام <span class="highlight-red">محافظين</span> من الغربية في نسختين متتاليتين من المعرض
+                <span class="gold-name-small">م/ عبدالله جاد</span> عرض مشاريعه أمام <span class="highlight-red">محافظين</span> من الغربية في نسختين متتاليتين من المعرض
             </p>
         </div>
     </div>
@@ -757,7 +875,7 @@
     <!-- الجدول الزمني للإنجازات -->
     <div class="content-card fade-in">
         <h2 style="text-align: center; color: gold; margin-bottom: 30px;">
-            <i class="fas fa-road"></i> رحلة الإنجازات
+            <i class="fas fa-road"></i> رحلة إنجازات <span class="gold-name-small">المهندس عبدالله جاد</span>
         </h2>
         <div class="timeline">
             <!-- 2024 - مسابقة المبتكر الصغير -->
@@ -765,28 +883,28 @@
                 <div class="timeline-content">
                     <div class="year">2024</div>
                     <div class="achievement-title">🏆 المركز الأول - المدرسة</div>
-                    <div class="achievement-desc">مسابقة المبتكر الصغير - على مستوى المدرسة</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> - مسابقة المبتكر الصغير</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2024</div>
-                    <div class="achievement-title">🏆 المركز الأول - إدارة شرق المحلة التعليمية</div>
-                    <div class="achievement-desc">مسابقة المبتكر الصغير - على مستوى الإدارة</div>
+                    <div class="achievement-title">🏆 المركز الأول - إدارة شرق المحلة</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> يتألق في مسابقة المبتكر الصغير</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2024</div>
-                    <div class="achievement-title">🏆 المركز الأول - مديرية التربية والتعليم بالغربية</div>
-                    <div class="achievement-desc">مسابقة المبتكر الصغير - على مستوى المحافظة</div>
+                    <div class="achievement-title">🏆 المركز الأول - مديرية الغربية</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> بطل المحافظة</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2024</div>
                     <div class="achievement-title">🥇 المركز <span class="highlight-gold">الرابع</span> - الجمهورية</div>
-                    <div class="achievement-desc">مسابقة المبتكر الصغير 2024 - على مستوى الجمهورية</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> - مسابقة المبتكر الصغير 2024</div>
                 </div>
             </div>
             
@@ -795,28 +913,28 @@
                 <div class="timeline-content">
                     <div class="year">2025</div>
                     <div class="achievement-title">🏆 المركز الأول - المدرسة</div>
-                    <div class="achievement-desc">مسابقة أوائل الطلبة - على مستوى المدرسة</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> - أوائل الطلبة</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2025</div>
-                    <div class="achievement-title">🏆 المركز الأول - مديرية التربية والتعليم بالغربية</div>
-                    <div class="achievement-desc">مسابقة أوائل الطلبة - على مستوى المديرية</div>
+                    <div class="achievement-title">🏆 المركز الأول - مديرية الغربية</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> في صدارة المديرية</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2025</div>
                     <div class="achievement-title">🏆 المركز الأول - القطاع</div>
-                    <div class="achievement-desc">مسابقة أوائل الطلبة - على مستوى القطاع التعليمي</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> بطل القطاع التعليمي</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2025</div>
                     <div class="achievement-title">🥇 المركز <span class="highlight-gold">الخامس</span> - الجمهورية</div>
-                    <div class="achievement-desc">مسابقة أوائل الطلبة 2025 - قسم الإلكترونيات</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> - أوائل الطلبة 2025</div>
                 </div>
             </div>
             
@@ -825,7 +943,7 @@
                 <div class="timeline-content" style="border-color: rgba(0, 168, 107, 0.5);">
                     <div class="year">2025</div>
                     <div class="achievement-title" style="color: #00a86b;">🏛️ معرض مخرجات التعليم الفني</div>
-                    <div class="achievement-desc">عرض المشروع على <span class="highlight-gold">اللواء أشرف الجندي</span> - محافظ الغربية السابق</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> يعرض مشروعه على <span class="highlight-gold">اللواء أشرف الجندي</span></div>
                     <span class="gov-badge"><i class="fas fa-user-tie"></i> محافظ الغربية</span>
                 </div>
             </div>
@@ -835,21 +953,14 @@
                 <div class="timeline-content">
                     <div class="year">2025</div>
                     <div class="achievement-title">⭐ الطالب المثالي - المدرسة</div>
-                    <div class="achievement-desc">لقب الطالب المثالي على مستوى المدرسة 2025</div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <div class="year">2025</div>
-                    <div class="achievement-title">🏆 المركز الأول - إدارة شرق المحلة</div>
-                    <div class="achievement-desc">مسابقة المبتكر الصغير 2025 - على مستوى الإدارة</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> الطالب المثالي 2025</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
                     <div class="year">2025</div>
                     <div class="achievement-title">🎓 المركز الثالث - المدرسة</div>
-                    <div class="achievement-desc">الشهادة الثانوية الفنية - قسم الإلكترونيات الصناعية (تعليم مزدوج)</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> - الثانوية الفنية - إلكترونيات صناعية</div>
                     <span class="edu-badge"><i class="fas fa-microchip"></i> إلكترونيات صناعية</span>
                 </div>
             </div>
@@ -859,7 +970,7 @@
                 <div class="timeline-content" style="border-color: rgba(123, 47, 252, 0.5);">
                     <div class="year">2026</div>
                     <div class="achievement-title" style="color: #7b2ffc;">🏛️ معرض مخرجات التعليم الفني (للمرة الثانية)</div>
-                    <div class="achievement-desc">عرض المشروع على <span class="highlight-gold">اللواء علاء عبدالمعطي</span> - محافظ الغربية الحالي</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> يعرض مشروعه على <span class="highlight-gold">اللواء علاء عبدالمعطي</span></div>
                     <span class="gov-badge"><i class="fas fa-user-tie"></i> محافظ الغربية</span>
                 </div>
             </div>
@@ -869,7 +980,7 @@
                 <div class="timeline-content" style="border-color: rgba(0, 188, 212, 0.5);">
                     <div class="year">2026</div>
                     <div class="achievement-title" style="color: #00bcd4;">🏥 المعهد العالي للعلوم الصحية التطبيقية</div>
-                    <div class="achievement-desc">الالتحاق بقسم <span class="highlight-cyan">صيانة الأجهزة الطبية</span> - شربين</div>
+                    <div class="achievement-desc"><span class="gold-name-small" style="font-size: 0.9rem;">م/ عبدالله جاد</span> يلتحق بقسم <span class="highlight-cyan">صيانة الأجهزة الطبية</span></div>
                     <span class="edu-badge"><i class="fas fa-heartbeat"></i> صيانة أجهزة طبية</span>
                 </div>
             </div>
@@ -879,7 +990,7 @@
     <!-- ملخص الإنجازات بالأرقام -->
     <div class="content-card fade-in">
         <h2 style="text-align: center; color: gold; margin-bottom: 30px;">
-            <i class="fas fa-chart-line"></i> إنجازاتنا بالأرقام
+            <i class="fas fa-chart-line"></i> إنجازات <span class="gold-name-small">المهندس عبدالله جاد</span> بالأرقام
         </h2>
         <div class="achievements-grid">
             <div class="achievement-item">
@@ -890,7 +1001,7 @@
             </div>
             <div class="achievement-item">
                 <div class="achievement-icon"><i class="fas fa-medal"></i></div>
-                <div class="achievement-number">4</div>
+                <div class="achievement-number">2</div>
                 <p>مراكز جمهورية</p>
                 <small style="color: #aaa;">(الرابع 2024، الخامس 2025)</small>
             </div>
